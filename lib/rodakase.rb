@@ -7,6 +7,7 @@ require 'dry-auto_inject'
 require 'dry-configurable'
 
 require 'rodakase/version'
+require 'roda/plugins/flow'
 
 module Rodakase
   class Container
@@ -43,6 +44,8 @@ module Rodakase
     plugin :multi_route
     plugin :all_verbs
 
+    plugin :flow
+
     def self.container(&block)
       @container ||= Container.new
 
@@ -55,8 +58,12 @@ module Rodakase
       @container
     end
 
-    def self.[](name)
+    def self.resolve(name)
       @container[name]
+    end
+
+    def self.[](name)
+      resolve(name)
     end
 
     def self.load_routes!
