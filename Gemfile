@@ -4,3 +4,4 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'byebug', platform: :mri
+gem 'rack-test'

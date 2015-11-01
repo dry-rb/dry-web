@@ -59,6 +59,7 @@ DEPENDENCIES
   bundler (~> 1.7)
   byebug
   capybara
+  rack-test
   rake (~> 10.0)
   rodakase!
   rspec (~> 3.1)

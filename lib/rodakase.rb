@@ -1,7 +1,6 @@
 require 'roda'
 require 'logger'
 
-require 'byebug'
 require 'inflecto'
 require 'dry-container'
 require 'dry-auto_inject'
@@ -41,6 +40,9 @@ module Rodakase
     setting :root
     setting :auto_container, false
 
+    plugin :multi_route
+    plugin :all_verbs
+
     def self.container(&block)
       @container ||= Container.new
 
@@ -55,6 +57,10 @@ module Rodakase
 
     def self.[](name)
       @container[name]
+    end
+
+    def self.load_routes!
+      Dir[config.root.join('routes/**/*.rb')].each { |f| require f }
     end
   end
 end

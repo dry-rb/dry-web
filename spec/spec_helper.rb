@@ -10,6 +10,9 @@ if RUBY_ENGINE == "rbx"
 end
 
 require 'rodakase'
+require 'rack/test'
+
+ENV['RACK_ENV'] = 'test'
 
 root = Pathname(__FILE__).dirname
 
@@ -23,6 +26,13 @@ begin
 rescue LoadError; end
 
 RSpec.configure do |config|
+  config.disable_monkey_patching!
+
+  config.before(:suite) { Dummy.freeze }
+
+  config.include Rack::Test::Methods, type: :request
+  config.include Module.new { def app; Dummy.app; end }, type: :request
+
   config.before do
     @constants = Object.constants
   end
