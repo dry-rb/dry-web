@@ -16,6 +16,12 @@ root = Pathname(__FILE__).dirname
 Dir[root.join('support/*.rb').to_s].each { |f| require f }
 Dir[root.join('shared/*.rb').to_s].each { |f| require f }
 
+require root.join('dummy/dummy.rb').to_s
+
+begin
+  require 'byebug'
+rescue LoadError; end
+
 RSpec.configure do |config|
   config.before do
     @constants = Object.constants
