@@ -1,3 +1,8 @@
 module Entities
-  User = Struct.new(:id, :name)
+  class User < Dry::Data::Struct
+    include Equalizer.new(:id, :name)
+
+    attribute :id, 'int'
+    attribute :name, 'string'
+  end
 end

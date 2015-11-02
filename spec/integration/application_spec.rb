@@ -5,10 +5,6 @@ RSpec.describe 'Rodakase Application' do
     expect(Dummy::Application[:logger]).to be_instance_of(Logger)
   end
 
-  it 'auto-loads components' do
-    expect(Dummy::Application['entities.user']).to be_instance_of(Entities::User)
-  end
-
   it 'sets up namespaced dependencies' do
     expect(Dummy::Application['persistence.rom']).to be(ROM.container)
   end

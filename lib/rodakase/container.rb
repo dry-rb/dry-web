@@ -41,6 +41,9 @@ module Rodakase
 
         name = component_path.gsub('/', '.')
 
+        # FIXME: we need a public API in dry-container
+        next if _container.key?(name)
+
         register(name) do
           require root.join(component_path)
           Inflecto.constantize(klass).new

@@ -1,9 +1,11 @@
-module Persistence
-  class UserRepo
-    USERS = []
+require 'entities/user'
 
-    def create(user)
-      USERS << Entities::User.new(*user.values)
+module Persistence
+  class UserRepo < ROM::Repository
+    relations :users
+
+    def all
+      users.as(Entities::User).to_a
     end
   end
 end

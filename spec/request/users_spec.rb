@@ -1,3 +1,5 @@
+require 'entities/user'
+
 RSpec.describe '/users', type: :request do
   describe 'GET /users' do
     it 'renders hello template' do
@@ -16,7 +18,7 @@ RSpec.describe '/users', type: :request do
 
       expect(last_response).to be_created
 
-      expect(Persistence::UserRepo::USERS).to include(Entities::User.new(*user.values))
+      expect(container['persistence.user_repo'].all).to eql([Entities::User.new(id: 1, name: 'Jane')])
     end
   end
 end

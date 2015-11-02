@@ -3,9 +3,9 @@ module Dummy
     route('users') do |r|
       r.get(to: 'ui.users.hello')
 
-      r.resolve('persistence.user_repo') do |user_repo|
+      r.resolve('persistence.commands.create_user') do |create_user|
         r.post do
-          user_repo.create(r.params['user'])
+          create_user.(r.params['user'])
 
           response.status = 201
         end
