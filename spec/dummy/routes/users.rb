@@ -1,6 +1,6 @@
 class Dummy < Rodakase::Application
   route('users') do |r|
-    r.get { 'hello' }
+    r.get(to: 'ui.users.hello')
 
     r.resolve('persistence.user_repo') do |user_repo|
       r.post do

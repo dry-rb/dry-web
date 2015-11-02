@@ -1,10 +1,10 @@
 RSpec.describe '/users', type: :request do
   describe 'GET /users' do
-    it 'says hello' do
+    it 'renders hello template' do
       get '/users'
 
       expect(last_response).to be_ok
-      expect(last_response.body).to eql('hello')
+      expect(last_response.body).to eql('<h1>Hello World</h1>')
     end
   end
 

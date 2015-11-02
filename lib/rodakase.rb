@@ -7,6 +7,7 @@ require 'dry-auto_inject'
 require 'dry-configurable'
 
 require 'rodakase/version'
+require 'rodakase/renderer'
 require 'roda/plugins/flow'
 
 module Rodakase
@@ -16,7 +17,7 @@ module Rodakase
     def auto_load!(root)
       root_size = root.to_s.split('/').size
 
-      Dir[root.join('*/**.rb')].each do |path|
+      Dir[root.join('**/**.rb')].each do |path|
         path_split = path.to_s.split('/')
         path_size = path_split.size
 

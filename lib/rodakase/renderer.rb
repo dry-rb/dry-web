@@ -20,7 +20,7 @@ module Rodakase
       @root = root
     end
 
-    def call(template, locals)
+    def call(template, locals = {})
       Tilt.new(root.join(template)).render(Locals.new(locals))
     end
   end
