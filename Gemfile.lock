@@ -6,6 +6,7 @@ PATH
       dry-container
       inflecto
       roda
+      tilt
 
 GEM
   remote: https://rubygems.org/
@@ -48,7 +49,12 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.3.0)
     rspec-support (3.3.0)
+    slim (3.0.6)
+      temple (~> 0.7.3)
+      tilt (>= 1.3.3, < 2.1)
+    temple (0.7.6)
     thread_safe (0.3.5)
+    tilt (2.0.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -63,6 +69,7 @@ DEPENDENCIES
   rake (~> 10.0)
   rodakase!
   rspec (~> 3.1)
+  slim
 
 BUNDLED WITH
    1.10.6

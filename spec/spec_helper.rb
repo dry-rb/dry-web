@@ -14,12 +14,12 @@ require 'rack/test'
 
 ENV['RACK_ENV'] = 'test'
 
-root = Pathname(__FILE__).dirname
+SPEC_ROOT = Pathname(__FILE__).dirname
 
-Dir[root.join('support/*.rb').to_s].each { |f| require f }
-Dir[root.join('shared/*.rb').to_s].each { |f| require f }
+Dir[SPEC_ROOT.join('support/*.rb').to_s].each { |f| require f }
+Dir[SPEC_ROOT.join('shared/*.rb').to_s].each { |f| require f }
 
-require root.join('dummy/dummy.rb').to_s
+require SPEC_ROOT.join('dummy/dummy.rb').to_s
 
 begin
   require 'byebug'
@@ -31,7 +31,7 @@ RSpec.configure do |config|
   config.before(:suite) { Dummy.freeze }
 
   config.include Rack::Test::Methods, type: :request
-  config.include Module.new { def app; Dummy.app; end }, type: :request
+  config.include Helpers
 
   config.before do
     @constants = Object.constants

@@ -5,3 +5,4 @@ gemspec
 
 gem 'byebug', platform: :mri
 gem 'rack-test'
+gem 'slim'
