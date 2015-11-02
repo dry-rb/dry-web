@@ -9,6 +9,10 @@ RSpec.describe 'Rodakase Application' do
     expect(Dummy::Application['entities.user']).to be_instance_of(Entities::User)
   end
 
+  it 'sets up namespaced dependencies' do
+    expect(Dummy::Application['persistence.rom']).to be(ROM.container)
+  end
+
   it 'sets up auto-injection mechanism' do
     klass = Class.new { include Dummy::Import(:logger) }
 

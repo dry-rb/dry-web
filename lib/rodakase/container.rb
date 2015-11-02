@@ -4,35 +4,29 @@ require 'dry-auto_inject'
 
 module Rodakase
   class Container
-    include Dry::Container::Mixin
+    extend Dry::Container::Mixin
 
     setting :root
     setting :auto_load
 
     def self.configure(&block)
-      response = yield(config)
+      response = yield(self)
 
-      if response == instance
-        instance.auto_load!(config.root.join('lib')) if config.auto_load
+      Dir[root.join('core/container/**/*.rb')].each(&method(:require))
+
+      if response == self
+        auto_load!(root.join('lib')) if config.auto_load
       end
 
-      instance
-    end
-
-    def self.register(*args, &block)
-      instance.register(*args, &block)
-    end
-
-    def self.instance
-      @instance ||= new
+      self
     end
 
     def self.import
-      container = instance
+      container = self
       Dry::AutoInject.new { container(container) }
     end
 
-    def auto_load!(root)
+    def self.auto_load!(root)
       root_size = root.to_s.split('/').size
 
       Dir[root.join('**/**.rb')].each do |path|
@@ -52,6 +46,10 @@ module Rodakase
           Inflecto.constantize(klass).new
         end
       end
+    end
+
+    def self.root
+      config.root
     end
   end
 end
