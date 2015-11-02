@@ -9,8 +9,12 @@ if RUBY_ENGINE == "rbx"
   CodeClimate::TestReporter.start
 end
 
-require 'rodakase'
+begin
+  require 'byebug'
+rescue LoadError; end
+
 require 'rack/test'
+require 'slim'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -19,16 +23,12 @@ SPEC_ROOT = Pathname(__FILE__).dirname
 Dir[SPEC_ROOT.join('support/*.rb').to_s].each { |f| require f }
 Dir[SPEC_ROOT.join('shared/*.rb').to_s].each { |f| require f }
 
-require SPEC_ROOT.join('dummy/dummy.rb').to_s
-
-begin
-  require 'byebug'
-rescue LoadError; end
+require SPEC_ROOT.join('dummy/core/application').to_s
 
 RSpec.configure do |config|
   config.disable_monkey_patching!
 
-  config.before(:suite) { Dummy.freeze }
+  config.before(:suite) { Dummy::Application.freeze }
 
   config.include Rack::Test::Methods, type: :request
   config.include Helpers

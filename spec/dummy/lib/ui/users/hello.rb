@@ -1,7 +1,7 @@
 module Ui
   module Users
     class Hello
-      include Dummy::AutoInject(:renderer)
+      include Dummy::Import(:renderer)
 
       def call
         renderer.call('users/hello.slim')

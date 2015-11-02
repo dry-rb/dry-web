@@ -4,6 +4,6 @@ module Helpers
   end
 
   def app
-    Dummy.app
+    Dummy::Application.app
   end
 end

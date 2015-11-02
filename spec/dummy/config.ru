@@ -1,4 +1,5 @@
 require 'rack'
 
-require_relative 'dummy'
-run Dummy.freeze.app
+require_relative 'core/application'
+
+run Dummy::Application.freeze.app
