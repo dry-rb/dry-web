@@ -1,4 +1,6 @@
 require 'inflecto'
+require 'dry-container'
+require 'dry-auto_inject'
 
 module Rodakase
   class Container

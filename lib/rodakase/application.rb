@@ -1,3 +1,6 @@
+require 'roda'
+require 'dry-configurable'
+
 module Rodakase
   class Application < Roda
     extend Dry::Configurable

@@ -1,4 +1,4 @@
-require 'rodakase'
+require 'rodakase/application'
 require_relative 'import'
 
 module Dummy

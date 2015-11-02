@@ -1,4 +1,6 @@
+require 'logger'
 require 'rodakase/container'
+require 'rodakase/renderer'
 
 module Dummy
   class Container < Rodakase::Container
