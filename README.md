@@ -30,6 +30,10 @@ Rodakase says **NO** to the following concepts:
 * tight coupling between web application logic and core domain logic
 * tight coupling between persistence logic and core domain logic
 
+## Sample App
+
+A sample rodakase-based web app is [right here](https://github.com/solnic/rodakase-blog).
+
 ## Status
 
 This project hasn't been released yet. It's under heavy development.
@@ -47,7 +51,7 @@ Rodakase is based on a bunch of awesome libraries:
 
 ## The Book
 
-Rodakase will be described in ["Web Development with ROM and Roda"](https://leanpub.com/web-development-with-rom-and-roda]) book
+Rodakase will be described in ["Web Development with ROM and Roda"](https://leanpub.com/web-development-with-rom-and-roda) book
 that I'm working on. If you're interested in the project and/or the book, feel free
 to join [Rodakase gitter channel](https://gitter.im/solnic/rodakase).
 
