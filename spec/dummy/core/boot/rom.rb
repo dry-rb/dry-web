@@ -9,7 +9,7 @@ Dummy::Container.namespace('persistence') do |container|
     else
       ROM.use(:auto_registration)
 
-      ROM.setup(:sql, 'postgres://localhost/rodakase')
+      ROM.setup(:sql, container.config.app.database_url)
 
       %w(relations commands).each do |type|
         Dir[container.root.join("lib/persistence/#{type}/**/*.rb")]

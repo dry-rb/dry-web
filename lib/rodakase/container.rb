@@ -2,14 +2,21 @@ require 'inflecto'
 require 'dry-container'
 require 'dry-auto_inject'
 
+require 'rodakase/config'
+
 module Rodakase
   class Container
     extend Dry::Container::Mixin
 
     setting :root
     setting :auto_load
+    setting :app
 
-    def self.configure(&block)
+    def self.configure(env = :development, &block)
+      super() do |config|
+        config.app = Config.load(root, env)
+      end
+
       response = yield(self)
 
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))

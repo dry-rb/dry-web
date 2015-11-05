@@ -4,6 +4,7 @@ require_relative 'import'
 module Dummy
   class Application < Rodakase::Application
     setting :container, Container
+    setting :config, Container.config
 
     route do |r|
       r.multi_route

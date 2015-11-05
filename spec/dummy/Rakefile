@@ -1,0 +1,12 @@
+require 'bundler'
+
+Bundler.setup
+
+require_relative 'core/container'
+require 'rom/sql/rake_task'
+
+namespace :db do
+  task :setup do
+    Dummy::Container['persistence.rom']
+  end
+end
