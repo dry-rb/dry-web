@@ -23,7 +23,7 @@ SPEC_ROOT = Pathname(__FILE__).dirname
 Dir[SPEC_ROOT.join('support/*.rb').to_s].each { |f| require f }
 Dir[SPEC_ROOT.join('shared/*.rb').to_s].each { |f| require f }
 
-require SPEC_ROOT.join('dummy/core/application').to_s
+require SPEC_ROOT.join('dummy/core/boot').to_s
 
 require 'database_cleaner'
 

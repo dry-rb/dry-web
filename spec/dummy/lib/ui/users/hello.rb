@@ -1,3 +1,5 @@
+require 'dummy/import'
+
 module Ui
   module Users
     class Hello

@@ -22,7 +22,7 @@ module Rodakase
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
       Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
-      auto_load!(root.join('lib')) if response == self && config.auto_load
+      auto_load!(lib_path) if response == self && config.auto_load
 
       self
     end

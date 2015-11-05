@@ -7,5 +7,3 @@ module Dummy
     Import[*args]
   end
 end
-
-Dummy::Container.finalize!

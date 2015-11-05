@@ -1,3 +1,3 @@
-require_relative 'core/application'
+require_relative 'core/boot'
 
 run Dummy::Application.freeze.app

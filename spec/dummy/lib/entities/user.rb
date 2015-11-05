@@ -1,3 +1,5 @@
+require 'dry/data'
+
 module Entities
   class User < Dry::Data::Struct
     include Equalizer.new(:id, :name)
