@@ -7,6 +7,7 @@ gem 'byebug', platform: :mri
 gem 'rack-test'
 gem 'slim'
 
+gem 'pry'
 gem 'pg'
 gem 'database_cleaner'
 gem 'dry-data'

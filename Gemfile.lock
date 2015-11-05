@@ -108,6 +108,7 @@ GEM
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
     charlatan (0.1.0)
+    coderay (1.1.0)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     database_cleaner (1.5.1)
@@ -132,12 +133,17 @@ GEM
     kleisli (0.2.6)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
+    method_source (0.8.2)
     mime-types (2.6.2)
     mini_portile (0.6.2)
     minitest (5.8.2)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     pg (0.18.3)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -161,6 +167,7 @@ GEM
     slim (3.0.6)
       temple (~> 0.7.3)
       tilt (>= 1.3.3, < 2.1)
+    slop (3.6.0)
     temple (0.7.6)
     thread_safe (0.3.5)
     tilt (2.0.1)
@@ -186,6 +193,7 @@ DEPENDENCIES
   dry-data
   equalizer
   pg
+  pry
   rack-test
   rake (~> 10.0)
   rodakase!
