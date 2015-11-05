@@ -18,7 +18,7 @@ RSpec.describe '/users', type: :request do
 
       expect(last_response).to be_created
 
-      expect(container['persistence.user_repo'].all).to eql([Entities::User.new(id: 1, name: 'Jane')])
+      expect(container['persistence.repositories.users'].all).to eql([Entities::User.new(id: 1, name: 'Jane')])
     end
   end
 end

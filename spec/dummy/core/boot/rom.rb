@@ -1,4 +1,5 @@
 require 'rom'
+require 'rom-repository'
 
 Dummy::Container.namespace('persistence') do |container|
   container.register('rom') do
@@ -17,5 +18,9 @@ Dummy::Container.namespace('persistence') do |container|
 
       ROM.finalize.container
     end
+  end
+
+  container.auto_load!(container.root.join('lib/persistence/repositories')) do |repo_class|
+    -> { Inflecto.constantize(repo_class).new(container['persistence.rom']) }
   end
 end

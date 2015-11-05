@@ -3,8 +3,6 @@ require 'rodakase/container'
 require 'rodakase/renderer'
 
 require 'dry/data'
-require 'rom-sql'
-require 'rom-repository'
 
 module Dummy
   class Container < Rodakase::Container

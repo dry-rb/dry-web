@@ -20,38 +20,48 @@ module Rodakase
       self
     end
 
-    def self.import
+    def self.import_module
       container = self
       Dry::AutoInject.new { container(container) }
     end
 
-    def self.auto_load!(root)
-      root_size = root.to_s.split('/').size
+    def self.finalize!
+      auto_loaded_paths.each(&method(:require))
+      freeze
+    end
 
-      Dir[root.join('**/**.rb')].each do |path|
-        path_split = path.to_s.split('/')
-        path_size = path_split.size
+    def self.auto_load!(source_path, &block)
+      Dir[source_path.join('**/*.rb')].each do |path|
+        component_path = (path.to_s.split('/') - lib_path.to_s.split('/'))
+          .join('/').gsub('.rb', '')
 
-        component_path = path_split[root_size-path_size..path_size]
-          .join('/')
-          .gsub('.rb', '')
+        klass_name = Inflecto.camelize(component_path)
+        identifier = component_path.gsub('/', '.')
 
-        klass = Inflecto.camelize(component_path)
+        next if _container.key?(identifier)
 
-        name = component_path.gsub('/', '.')
+        auto_loaded_paths << lib_path.join(component_path)
 
-        # FIXME: we need a public API in dry-container
-        next if _container.key?(name)
-
-        register(name) do
-          require root.join(component_path)
-          Inflecto.constantize(klass).new
+        if block
+          register(identifier, yield(klass_name))
+        else
+          register(identifier) do
+            Inflecto.constantize(klass_name).new
+          end
         end
       end
     end
 
     def self.root
       config.root
+    end
+
+    def self.lib_path
+      root.join('lib')
+    end
+
+    def self.auto_loaded_paths
+      @_auto_loaded_paths ||= []
     end
   end
 end
