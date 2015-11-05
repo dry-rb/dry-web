@@ -12,11 +12,10 @@ module Rodakase
     def self.configure(&block)
       response = yield(self)
 
+      Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
       Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
-      if response == self
-        auto_load!(root.join('lib')) if config.auto_load
-      end
+      auto_load!(root.join('lib')) if response == self && config.auto_load
 
       self
     end
