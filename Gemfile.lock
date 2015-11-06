@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: git://github.com/rom-rb/rom-sql.git
-  revision: 4aef266522c1ab95e2fbe91272af240b363507ce
+  revision: 0a17586961eb2d02d74e4b34d31f64ce3bf99d66
   branch: master
   specs:
     rom-sql (0.7.0.beta1)
