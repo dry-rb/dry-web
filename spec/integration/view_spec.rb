@@ -25,8 +25,13 @@ RSpec.describe 'Rodakase View' do
   it 'renders within a layout using provided scope' do
     view = view_class.new
 
-    expect(view.(scope, users: %w(jane joe))).to eql(
-      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><ul><li>jane</li><li>joe</li></ul></body></html>'
+    users = [
+      { name: 'Jane', email: 'jane@doe.org' },
+      { name: 'Joe', email: 'joe@doe.org' }
+    ]
+
+    expect(view.(scope, users: users)).to eql(
+      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><div class="users"><table><tr><td>Jane</td><td>jane@doe.org</td></tr><tr><td>Joe</td><td>joe@doe.org</td></tr></table></div></body></html>'
     )
   end
 
