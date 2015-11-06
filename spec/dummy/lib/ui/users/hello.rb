@@ -1,12 +1,10 @@
-require 'dummy/import'
+require 'dummy/view'
 
 module Ui
   module Users
-    class Hello
-      include Dummy::Import(:renderer)
-
-      def call
-        renderer.call('users/hello.slim')
+    class Hello < Dummy::View
+      configure do |config|
+        config.template = 'users/hello'
       end
     end
   end

@@ -1,4 +1,5 @@
 require 'entities/user'
+require 'dummy/import'
 
 RSpec.describe 'Rodakase Application' do
   it 'loads container' do

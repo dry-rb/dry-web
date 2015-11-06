@@ -2,13 +2,16 @@ require 'rodakase/view'
 
 RSpec.describe 'Rodakase View' do
   let(:view_class) do
-    Class.new(Rodakase::View) do
-      configure do |config|
-        config.engine = :slim
-        config.layout = 'app'
-        config.template = 'users'
-      end
+    klass = Class.new(Rodakase::View)
+
+    klass.configure do |config|
+      config.renderer = -> { renderer }
+      config.engine = :slim
+      config.layout = 'app'
+      config.template = 'users'
     end
+
+    klass
   end
 
   let(:renderer) do
@@ -20,10 +23,38 @@ RSpec.describe 'Rodakase View' do
   end
 
   it 'renders within a layout using provided scope' do
-    view = view_class.new(renderer)
+    view = view_class.new
 
     expect(view.(scope, users: %w(jane joe))).to eql(
       '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><ul><li>jane</li><li>joe</li></ul></body></html>'
     )
+  end
+
+  describe 'inheritance' do
+    let(:parent_view) do
+      klass = Class.new(Rodakase::View)
+
+      klass.setting :renderer, -> { renderer }
+      klass.setting :engine, :slim
+      klass.setting :layout, 'app'
+
+      klass
+    end
+
+    let(:child_view) do
+      Class.new(parent_view) do
+        configure do |config|
+          config.template = 'tasks'
+        end
+      end
+    end
+
+    it 'renders within a parent class layout using provided scope' do
+      view = child_view.new
+
+      expect(view.(scope, tasks: %w(one two))).to eql(
+        '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><ol><li>one</li><li>two</li></ol></body></html>'
+      )
+    end
   end
 end

@@ -1,5 +1,7 @@
 module Rodakase
   class View
+    extend Dry::Configurable
+
     class Scope
       attr_reader :data
 
@@ -12,17 +14,16 @@ module Rodakase
       end
     end
 
-    extend Dry::Configurable
-
     setting :engine
+    setting :renderer
     setting :layout
     setting :template
 
     attr_reader :config, :renderer, :template, :layout
 
-    def initialize(renderer, config = self.class.config)
-      @renderer = renderer
-      @config = config
+    def initialize
+      @config = self.class.config
+      @renderer = @config.renderer.()
       @layout = "layouts/#{config.layout}.#{config.engine}"
       @template = "#{config.template}.#{config.engine}"
     end

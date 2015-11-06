@@ -2,6 +2,7 @@ require 'logger'
 require 'rodakase/renderer'
 
 require_relative 'dummy/application'
+require_relative 'dummy/view'
 
 Dummy::Container.configure do |container|
   container.register(:logger) do
