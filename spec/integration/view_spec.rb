@@ -15,11 +15,15 @@ RSpec.describe 'Rodakase View' do
     Class.new(Rodakase::Renderer).new(SPEC_ROOT.join('fixtures/templates'))
   end
 
-  it 'renders within a layout' do
+  let(:scope) do
+    Struct.new(:title).new('Rodakase Rocks!')
+  end
+
+  it 'renders within a layout using provided scope' do
     view = view_class.new(renderer)
 
-    expect(view.(users: %w(jane joe))).to eql(
-      '<!DOCTYPE html><html><head><title>Testing</title></head><body><ul><li>jane</li><li>joe</li></ul></body></html>'
+    expect(view.(scope, users: %w(jane joe))).to eql(
+      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><ul><li>jane</li><li>joe</li></ul></body></html>'
     )
   end
 end

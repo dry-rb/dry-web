@@ -1,5 +1,17 @@
 module Rodakase
   class View
+    class Scope
+      attr_reader :data
+
+      def initialize(data)
+        @data = data
+      end
+
+      def method_missing(name)
+        data[name]
+      end
+    end
+
     extend Dry::Configurable
 
     setting :engine
@@ -15,12 +27,12 @@ module Rodakase
       @template = "#{config.template}.#{config.engine}"
     end
 
-    def call(locals = {})
-      renderer.(layout) { render(locals) }
+    def call(scope, locals = {})
+      renderer.(layout, scope) { render(locals) }
     end
 
     def render(locals = {})
-      renderer.(template, locals)
+      renderer.(template, Scope.new(locals))
     end
   end
 end
