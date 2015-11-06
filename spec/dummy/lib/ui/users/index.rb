@@ -2,9 +2,9 @@ require 'dummy/view'
 
 module Ui
   module Users
-    class Hello < Dummy::View
+    class Index < Dummy::View
       configure do |config|
-        config.template = 'users/hello'
+        config.template = 'users/index'
       end
 
       def call(scope, locals = {})

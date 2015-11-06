@@ -7,7 +7,7 @@ RSpec.describe '/users', type: :request do
 
       expect(last_response).to be_ok
       expect(last_response.body).to eql(
-        "<!DOCTYPE html><html><head><title>Woohaa</title></head><body><h1>Hello World</h1><div class=\"users\"><ul><li>Jane</li><li>Joe</li></ul></div></body></html>"
+        '<!DOCTYPE html><html><head><title>Woohaa</title></head><body><h1>Users</h1><div class="users"><ul><li>Jane</li><li>Joe</li></ul></div></body></html>'
       )
     end
   end
