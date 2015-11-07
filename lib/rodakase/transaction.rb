@@ -1,3 +1,4 @@
+require 'delegate'
 require 'transflow'
 
 require 'rodakase/transaction/result'
@@ -6,6 +7,10 @@ require 'rodakase/transaction/matcher'
 module Rodakase
   module Transaction
     class Flow
+      extend Forwardable
+
+      def_delegator :@transaction, :subscribe
+
       attr_reader :transaction
 
       def initialize(transaction)
@@ -13,7 +18,13 @@ module Rodakase
       end
 
       def call(*args, &block)
-        yield(Matcher.new(transaction.call(*args)))
+        result = transaction.call(*args)
+
+        if block
+          yield(Matcher.new(result))
+        else
+          result
+        end
       end
     end
 

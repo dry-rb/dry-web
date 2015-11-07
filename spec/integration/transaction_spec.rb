@@ -1,7 +1,7 @@
 require 'rodakase/transaction'
 
 RSpec.describe 'Rodakase Transaction' do
-  subject(:request) { Rodakase::Transaction::Composer.new(container) }
+  subject(:transaction) { Rodakase::Transaction::Composer.new(container) }
 
   let(:container) do
     {
@@ -26,8 +26,12 @@ RSpec.describe 'Rodakase Transaction' do
   end
 
   let(:pipeline) do
-    request.define do
-      steps :validate_params, :persist_user, :render_ui
+    transaction.define do
+      step :validate_params do
+        step :persist_user, publish: true do
+          step :render_ui
+        end
+      end
     end
   end
 
@@ -61,5 +65,21 @@ RSpec.describe 'Rodakase Transaction' do
     end
 
     expect(result).to include('missing email')
+  end
+
+  it 'works with publisher' do
+    Test::NOTIFICATIONS = []
+
+    module Test::Listener
+      def self.persist_user_success(result)
+        result.fmap { |db| Test::NOTIFICATIONS << db.last }
+      end
+    end
+
+    pipeline.subscribe(persist_user: Test::Listener)
+
+    pipeline.(email: 'jane@doe.org')
+
+    expect(Test::NOTIFICATIONS).to include(email: 'jane@doe.org')
   end
 end
