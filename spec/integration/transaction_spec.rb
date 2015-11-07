@@ -1,4 +1,4 @@
-require 'rodakase/request/composer'
+require 'rodakase/transaction'
 
 RSpec.describe 'Rodakase Transaction' do
   subject(:request) { Rodakase::Transaction::Composer.new(container) }
