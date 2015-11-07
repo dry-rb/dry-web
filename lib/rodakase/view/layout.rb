@@ -13,17 +13,17 @@ module Rodakase
       setting :name
       setting :template
 
-      attr_reader :config, :renderer, :template, :layout
+      attr_reader :config, :renderer, :template, :name
 
       def initialize
         @config = self.class.config
         @renderer = @config.renderer.()
-        @layout = "layouts/#{config.layout}.#{config.engine}"
+        @name = "layouts/#{config.name}.#{config.engine}"
         @template = "#{config.template}.#{config.engine}"
       end
 
       def call(scope, locals = {})
-        renderer.(layout, scope) do
+        renderer.(name, scope) do
           render(Scope.new(parts(locals)))
         end
       end
