@@ -4,11 +4,19 @@ module Dummy
       r.resolve('ui.view_scope') do |view_scope|
         r.get(to: 'ui.users.index', call_with: [view_scope])
 
-        r.resolve('persistence.commands.create_user') do |create_user|
+        r.resolve('requests.users.create') do |t|
           r.post do
-            create_user.(r.params['user'])
+            t.(r[:user]) do |m|
+              m.success do
+                response.status = 201
+              end
 
-            response.status = 201
+              m.failure do |err|
+                err.on(:validation) do |v|
+                  r.redirect '/users'
+                end
+              end
+            end
           end
         end
       end

@@ -47,7 +47,7 @@ module Rodakase
 
         next if _container.key?(identifier)
 
-        auto_loaded_paths << lib_path.join(component_path)
+        auto_loaded_paths << lib_path.join(component_path).to_s
 
         if block
           register(identifier, yield(klass_name))

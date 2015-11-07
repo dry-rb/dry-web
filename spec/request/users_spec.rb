@@ -22,5 +22,13 @@ RSpec.describe '/users', type: :request do
 
       expect(container['persistence.repositories.users'].all).to eql([Entities::User.new(id: 1, name: 'Jane')])
     end
+
+    it 'redirects when name is missing' do
+      user = { id: '1' }
+
+      post '/users', user: user
+
+      expect(last_response).to be_redirect
+    end
   end
 end
