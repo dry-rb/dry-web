@@ -1,5 +1,4 @@
-require 'logger'
-require 'rodakase/renderer'
+require 'rodakase/view/renderer'
 
 require_relative 'dummy/application'
 require_relative 'dummy/view'
@@ -10,7 +9,7 @@ Dummy::Container.configure do |container|
   end
 
   container.register(:renderer) do
-    Rodakase::Renderer.new(container.root.join('templates'))
+    Rodakase::View::Renderer.new(container.root.join('templates'))
   end
 end
 

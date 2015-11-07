@@ -2,12 +2,12 @@ require 'rodakase/view'
 
 RSpec.describe 'Rodakase View' do
   let(:view_class) do
-    klass = Class.new(Rodakase::View)
+    klass = Class.new(Rodakase::View::Layout)
 
     klass.configure do |config|
       config.renderer = -> { renderer }
       config.engine = :slim
-      config.layout = 'app'
+      config.name = 'app'
       config.template = 'users'
     end
 
@@ -15,7 +15,7 @@ RSpec.describe 'Rodakase View' do
   end
 
   let(:renderer) do
-    Class.new(Rodakase::Renderer).new(SPEC_ROOT.join('fixtures/templates'))
+    Class.new(Rodakase::View::Renderer).new(SPEC_ROOT.join('fixtures/templates'))
   end
 
   let(:scope) do
@@ -37,11 +37,11 @@ RSpec.describe 'Rodakase View' do
 
   describe 'inheritance' do
     let(:parent_view) do
-      klass = Class.new(Rodakase::View)
+      klass = Class.new(Rodakase::View::Layout)
 
       klass.setting :renderer, -> { renderer }
       klass.setting :engine, :slim
-      klass.setting :layout, 'app'
+      klass.setting :name, 'app'
 
       klass
     end
