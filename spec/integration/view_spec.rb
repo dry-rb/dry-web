@@ -15,7 +15,7 @@ RSpec.describe 'Rodakase View' do
   end
 
   let(:renderer) do
-    Class.new(Rodakase::View::Renderer).new(SPEC_ROOT.join('fixtures/templates'))
+    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'))
   end
 
   let(:scope) do
