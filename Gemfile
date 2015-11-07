@@ -6,6 +6,7 @@ gemspec
 gem 'byebug', platform: :mri
 gem 'rack-test'
 gem 'slim'
+gem 'transflow', github: 'solnic/transflow', branch: 'master'
 
 gem 'pry'
 gem 'pg'

@@ -1,9 +1,5 @@
 # encoding: utf-8
 
-# this is needed for guard to work, not sure why :(
-require "bundler"
-Bundler.setup
-
 if RUBY_ENGINE == "rbx"
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start

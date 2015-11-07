@@ -59,6 +59,16 @@ GIT
       rom-support (~> 1.0.0.beta1)
 
 GIT
+  remote: git://github.com/solnic/transflow.git
+  revision: 19ccef1bb497dbedb60c73bc6b0a3ff6d7023704
+  branch: master
+  specs:
+    transflow (0.3.0)
+      dry-pipeline
+      kleisli
+      wisper
+
+GIT
   remote: git://github.com/solnic/transproc.git
   revision: 86c8b3af719fc0358dc253615b3aa10f604e19bd
   branch: master
@@ -74,6 +84,7 @@ PATH
       inflecto
       roda
       tilt
+      transflow
 
 GEM
   remote: https://rubygems.org/
@@ -125,6 +136,7 @@ GEM
       dry-container (~> 0.2)
       inflecto (~> 0.0.0, >= 0.0.2)
       kleisli (~> 0.2)
+    dry-pipeline (0.0.1)
     equalizer (0.0.11)
     i18n (0.7.0)
     ice_nine (0.11.1)
@@ -205,6 +217,7 @@ DEPENDENCIES
   rom-support!
   rspec (~> 3.1)
   slim
+  transflow!
   transproc!
 
 BUNDLED WITH

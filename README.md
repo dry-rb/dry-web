@@ -47,7 +47,7 @@ Rodakase is based on a bunch of awesome libraries:
 * dry-container
 * dry-auto_inject
 * tilt
-* call_sheet
+* transflow
 
 ## The Book
 
