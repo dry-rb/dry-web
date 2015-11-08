@@ -1,8 +1,9 @@
+require 'dummy/container'
 require 'rodakase/view'
 
 module Dummy
   class View < Rodakase::View::Layout
-    setting :renderer, -> engine { Dummy::Container[:renderer].(engine) }
+    setting :root, Container.root.join('templates')
     setting :engine, :slim
     setting :name, 'app'
   end

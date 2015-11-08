@@ -22,19 +22,17 @@ module Rodakase
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
       Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
-      auto_load!(lib_path) if response == self && config.auto_load
+      if response == self && config.auto_load
+        auto_load!(lib_path)
+        auto_loaded_paths.each(&method(:require))
+      end
 
-      self
+      freeze
     end
 
     def self.import_module
       container = self
       Dry::AutoInject.new { container(container) }
-    end
-
-    def self.finalize!
-      auto_loaded_paths.each(&method(:require))
-      freeze
     end
 
     def self.auto_load!(source_path, &block)

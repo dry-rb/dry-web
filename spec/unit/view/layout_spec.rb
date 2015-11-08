@@ -5,7 +5,7 @@ RSpec.describe Rodakase::View::Layout do
     klass = Class.new(Rodakase::View::Layout)
 
     klass.configure do |config|
-      config.renderer = -> _engine { renderer }
+      config.renderer = renderer
       config.name = 'app'
       config.template = 'user'
       config.engine = 'slim'

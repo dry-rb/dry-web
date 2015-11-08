@@ -13,11 +13,21 @@ module Rodakase
       setting :name
       setting :template
 
+      def self.configure(&block)
+        super do |config|
+          yield(config)
+
+          unless config.renderer
+            config.renderer = Renderer.new(config.root, config.engine)
+          end
+        end
+      end
+
       attr_reader :config, :renderer, :path, :template, :partial_dirname
 
       def initialize
         @config = self.class.config
-        @renderer = @config.renderer.(config.engine)
+        @renderer = @config.renderer
         @path = "layouts/#{config.name}"
         @template = "#{config.template}"
         @partial_dirname = config.template
