@@ -3,16 +3,14 @@ module Rodakase
     class Part
       attr_reader :renderer, :config, :data
 
-      alias_method :value, :data
-
       def initialize(renderer, config, data)
         @renderer = renderer
         @config = config
         @data = data
       end
 
-      def to_s
-        value
+      def value
+        data.values[0]
       end
 
       def [](name)
@@ -20,7 +18,7 @@ module Rodakase
       end
 
       def each(&block)
-        data.values[0].each(&block)
+        value.each(&block)
       end
 
       def render(path)

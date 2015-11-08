@@ -37,9 +37,8 @@ module Rodakase
           part =
             case value
             when Array
-              part(key => value.map { |element| part(element) })
-            when Hash
-              part(value)
+              el_key = Inflecto.singularize(key).to_sym
+              part(key => value.map { |element| part(el_key => element) })
             end
 
           result[key] = part
