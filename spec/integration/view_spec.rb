@@ -5,7 +5,7 @@ RSpec.describe 'Rodakase View' do
     klass = Class.new(Rodakase::View::Layout)
 
     klass.configure do |config|
-      config.renderer = -> { renderer }
+      config.renderer = -> _engine { renderer }
       config.engine = :slim
       config.name = 'app'
       config.template = 'users'
@@ -15,7 +15,7 @@ RSpec.describe 'Rodakase View' do
   end
 
   let(:renderer) do
-    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'))
+    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), 'slim')
   end
 
   let(:scope) do
@@ -39,7 +39,7 @@ RSpec.describe 'Rodakase View' do
     let(:parent_view) do
       klass = Class.new(Rodakase::View::Layout)
 
-      klass.setting :renderer, -> { renderer }
+      klass.setting :renderer, -> _engine { renderer }
       klass.setting :engine, :slim
       klass.setting :name, 'app'
 
@@ -57,7 +57,7 @@ RSpec.describe 'Rodakase View' do
     it 'renders within a parent class layout using provided scope' do
       view = child_view.new
 
-      expect(view.(scope, locals: { tasks: %w(one two) })).to eql(
+      expect(view.(scope, locals: { tasks: [{ title: 'one' }, { title: 'two' }] })).to eql(
         '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><ol><li>one</li><li>two</li></ol></body></html>'
       )
     end

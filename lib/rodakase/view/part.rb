@@ -1,47 +1,41 @@
 module Rodakase
   module View
     class Part
-      attr_reader :renderer, :config, :data
+      attr_reader :renderer, :_name, :_data, :_scope, :_value
 
-      def initialize(renderer, config, data)
+      def initialize(renderer, name, data, scope)
         @renderer = renderer
-        @config = config
-        @data = data
+        @_name = name
+        @_data = data
+        @_value = data.values[0]
+        @_scope = scope
       end
 
-      def value
-        data.values[0]
-      end
-
-      def [](name)
-        data[name]
+      def [](key)
+        _value[key]
       end
 
       def each(&block)
-        value.each(&block)
+        _value.each(&block)
       end
 
-      def render(path)
-        renderer.(path, Scope.new(data))
-      end
-
-      def template(name)
-        "#{config.template}/#{name}.#{config.engine}"
+      def render(name)
+        renderer.("_#{name}", _scope)
       end
 
       def template?(name)
-        File.exist?(renderer.root.join(template("_#{name}")))
+        renderer.template?("_#{name}")
       end
 
       def respond_to_missing?(name, include_private = false)
-        super || data.key?(name) || template?(name)
+        super || _data.key?(name) || template?(name)
       end
 
-      def method_missing(name, *args, &block)
-        if template?(name)
-          render(template("_#{name}"))
-        elsif data.key?(name)
-          data[name]
+      def method_missing(meth, *args, &block)
+        if template?(meth)
+          render(meth)
+        elsif _value.key?(meth)
+          _value[meth]
         else
           super
         end

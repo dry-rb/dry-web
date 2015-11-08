@@ -11,7 +11,7 @@ Dummy::Container.configure do |container|
 
   container.register(:transaction, Rodakase::Transaction::Composer.new(container))
 
-  container.register(:renderer, Rodakase::View::Renderer.new(container.root.join('templates')))
+  container.register(:renderer, -> engine { Rodakase::View::Renderer.new(container.root.join('templates'), engine) })
 end
 
 Dummy::Container.finalize!
