@@ -7,8 +7,8 @@ module Ui
         config.template = 'users/index'
       end
 
-      def call(scope, locals = {})
-        super(scope, users: [{ name: 'Jane' }, { name: 'Joe' }])
+      def locals
+        { users: [{ name: 'Jane' }, { name: 'Joe' }] }
       end
     end
   end

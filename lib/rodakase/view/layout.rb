@@ -22,10 +22,14 @@ module Rodakase
         @template = "#{config.template}.#{config.engine}"
       end
 
-      def call(scope, locals = {})
+      def call(scope, locals = method(:locals))
         renderer.(name, scope) do
-          render(Scope.new(parts(locals)))
+          render(Scope.new(parts(locals.())))
         end
+      end
+
+      def locals
+        {}
       end
 
       def render(locals = {})
