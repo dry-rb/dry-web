@@ -30,7 +30,7 @@ RSpec.describe 'Rodakase View' do
       { name: 'Joe', email: 'joe@doe.org' }
     ]
 
-    expect(view.(scope, -> { { users: users } })).to eql(
+    expect(view.(scope, locals: { users: users })).to eql(
       '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><div class="users"><table><tr><td>Jane</td><td>jane@doe.org</td></tr><tr><td>Joe</td><td>joe@doe.org</td></tr></table></div></body></html>'
     )
   end
@@ -57,7 +57,7 @@ RSpec.describe 'Rodakase View' do
     it 'renders within a parent class layout using provided scope' do
       view = child_view.new
 
-      expect(view.(scope, -> { { tasks: %w(one two) } })).to eql(
+      expect(view.(scope, locals: { tasks: %w(one two) })).to eql(
         '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><ol><li>one</li><li>two</li></ol></body></html>'
       )
     end

@@ -7,7 +7,7 @@ module Ui
         config.template = 'users/index'
       end
 
-      def locals
+      def locals(options)
         { users: [{ name: 'Jane' }, { name: 'Joe' }] }
       end
     end
