@@ -33,7 +33,9 @@ module Rodakase
         @partial_dirname = config.template
       end
 
-      def call(scope, options = {})
+      def call(options = {})
+        scope = options.fetch(:scope)
+
         renderer.(path, scope) do
           template_scope = Scope.new(parts(locals(options)))
           renderer.(template, template_scope)
