@@ -23,7 +23,7 @@ module Rodakase
         end
       end
 
-      attr_reader :config, :renderer, :path, :template, :partial_dirname
+      attr_reader :config, :renderer, :scope, :path, :template, :partial_dirname
 
       def initialize
         @config = self.class.config
@@ -31,12 +31,13 @@ module Rodakase
         @path = "layouts/#{config.name}"
         @template = "#{config.template}"
         @partial_dirname = config.template
+        @scope = config.scope
       end
 
       def call(options = {})
-        scope = options.fetch(:scope)
+        layout_scope = Scope.new(page: options.fetch(:scope, scope))
 
-        renderer.(path, scope) do
+        renderer.(path, layout_scope) do
           template_scope = Scope.new(parts(locals(options)))
           renderer.(template, template_scope)
         end
