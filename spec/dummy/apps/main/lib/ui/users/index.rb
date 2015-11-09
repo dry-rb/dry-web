@@ -1,8 +1,8 @@
-require 'dummy/view'
+require 'main/view'
 
 module Ui
   module Users
-    class Index < Dummy::View
+    class Index < Main::View
       configure do |config|
         config.template = 'users/index'
       end

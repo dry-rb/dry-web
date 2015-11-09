@@ -30,7 +30,7 @@ RSpec.configure do |config|
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
-    Dummy::Application.freeze
+    Main::Application.freeze
   end
 
   config.include Rack::Test::Methods, type: :request

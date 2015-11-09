@@ -21,7 +21,7 @@ module Rodakase
     end
 
     def self.load_routes!
-      Dir[root.join('web/routes/**/*.rb')].each { |f| require f }
+      Dir[root.join('routes/**/*.rb')].each { |f| require f }
     end
 
     def self.root

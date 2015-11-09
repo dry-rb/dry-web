@@ -12,8 +12,4 @@ Dummy::Container.namespace('persistence') do |container|
   end
 
   container.register('rom', ROM.finalize.container)
-
-  container.auto_load!(container.root.join('lib/persistence/repositories')) do |repo_class|
-    -> { Inflecto.constantize(repo_class).new(container['persistence.rom']) }
-  end
 end

@@ -14,7 +14,8 @@ module Rodakase
 
     def self.configure(env = :development, &block)
       super() do |config|
-        config.app = Config.load(root, env)
+        app_config = Config.load(root, env)
+        config.app = app_config if app_config
       end
 
       response = yield(self)
@@ -55,6 +56,8 @@ module Rodakase
           end
         end
       end
+
+      self
     end
 
     def self.root

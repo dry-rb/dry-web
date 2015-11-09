@@ -1,9 +1,9 @@
 require 'rodakase/application'
 require_relative 'container'
 
-module Dummy
+module Main
   class Application < Rodakase::Application
-    setting :container, Container
+    setting :container, Main::Container
 
     route do |r|
       r.multi_route

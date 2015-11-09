@@ -1,7 +1,7 @@
-require 'dummy/container'
+require 'main/container'
 require 'rodakase/view'
 
-module Dummy
+module Main
   class Page
     def title
       'Woohaa'
@@ -9,7 +9,7 @@ module Dummy
   end
 end
 
-module Dummy
+module Main
   class View < Rodakase::View::Layout
     setting :root, Container.root.join('templates')
     setting :scope, Page.new

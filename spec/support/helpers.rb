@@ -6,11 +6,11 @@ module Helpers
   end
 
   def container
-    Dummy::Application
+    Dummy::Container
   end
 
   def app
-    Dummy::Application.app
+    Main::Application.app
   end
 
   def db_conn

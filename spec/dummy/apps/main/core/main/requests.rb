@@ -1,6 +1,6 @@
-require 'dummy/container'
+require 'main/container'
 
-module Dummy
+module Main
   module Requests
     class Registrar
       attr_reader :container

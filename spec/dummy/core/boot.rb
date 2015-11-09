@@ -1,15 +1,12 @@
-require 'logger'
-require 'rodakase/transaction'
-
 require_relative 'dummy/container'
 
 Dummy::Container.configure do |container|
+  require 'logger'
   container.register(:logger, Logger.new(container.root.join('log/app.log')))
+
+  require 'rodakase/transaction'
   container.register(:transaction, Rodakase::Transaction::Composer.new(container))
 end
 
-require 'dummy/application'
-require 'dummy/view'
-require 'dummy/requests'
-
-Dir[Dummy::Container.root.join('web/requests/**/*.rb')].each(&method(:require))
+app_paths = Pathname(__FILE__).dirname.join('../apps').realpath.join('*')
+Dir[app_paths].each { |f| require "#{f}/core/boot" }
