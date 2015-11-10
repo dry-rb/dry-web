@@ -69,7 +69,9 @@ gem 'rodakase'
 
 And then execute:
 
+```
 $ bundle
+```
 
 Or install it yourself as:
 
