@@ -97,6 +97,12 @@ GEM
   remote: https://rubygems.org/
   specs:
     abstract_type (0.0.7)
+    actionview (4.2.4)
+      activesupport (= 4.2.4)
+      builder (~> 3.1)
+      erubis (~> 2.7.0)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.2)
     activemodel (4.2.4)
       activesupport (= 4.2.4)
       builder (~> 3.1)
@@ -117,6 +123,7 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    benchmark-ips (2.3.0)
     builder (3.2.2)
     byebug (6.0.2)
     capybara (2.5.0)
@@ -144,11 +151,14 @@ GEM
       kleisli (~> 0.2)
     dry-pipeline (0.0.1)
     equalizer (0.0.11)
+    erubis (2.7.0)
     i18n (0.7.0)
     ice_nine (0.11.1)
     inflecto (0.0.2)
     json (1.8.3)
     kleisli (0.2.6)
+    loofah (2.0.3)
+      nokogiri (>= 1.5.9)
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
@@ -165,6 +175,14 @@ GEM
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.7)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.2)
+      loofah (~> 2.0)
     rake (10.4.2)
     roda (2.7.0)
       rack
@@ -204,6 +222,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionview
+  benchmark-ips
   bundler (~> 1.7)
   byebug
   capybara
