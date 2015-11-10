@@ -33,7 +33,7 @@ module Rodakase
       end
 
       def tilt(path)
-        tilts.fetch(path) { tilts[path] = Tilt.new(path) }
+        tilts.fetch(path) { tilts[path] = Tilt[engine].new(path) }
       end
 
       def lookup(name)
