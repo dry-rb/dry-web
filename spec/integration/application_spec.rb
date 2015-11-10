@@ -1,6 +1,10 @@
 require 'main/import'
 
 RSpec.describe 'Rodakase Application' do
+  it 'sets env' do
+    expect(Main::Application.config.container.config.env).to be(:test)
+  end
+
   it 'loads container' do
     expect(Main::Application[:logger]).to be_instance_of(Logger)
   end

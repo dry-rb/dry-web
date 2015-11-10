@@ -8,11 +8,12 @@ module Rodakase
   class Container
     extend Dry::Container::Mixin
 
+    setting :env, ENV.fetch('RACK_ENV', :development).to_sym
     setting :root, Pathname.pwd.freeze
     setting :auto_load
     setting :app
 
-    def self.configure(env = :development, &block)
+    def self.configure(env = config.env, &block)
       super() do |config|
         app_config = Config.load(root, env)
         config.app = app_config if app_config
