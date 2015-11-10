@@ -1,11 +1,12 @@
 require 'dry-configurable'
 
-require 'rodakase/view/scope'
 require 'rodakase/view/part'
 
 module Rodakase
   module View
     class Layout
+      Scope = Struct.new(:page)
+
       extend Dry::Configurable
 
       setting :engine
@@ -35,10 +36,12 @@ module Rodakase
       end
 
       def call(options = {})
-        layout_scope = Scope.new(page: options.fetch(:scope, scope))
+        layout_scope = Scope.new(
+          Part.new(renderer.chdir('layouts'), page: options.fetch(:scope, scope))
+        )
 
         renderer.(path, layout_scope) do
-          template_scope = Scope.new(parts(locals(options)))
+          template_scope = parts(locals(options))
           renderer.(template, template_scope)
         end
       end
@@ -54,17 +57,19 @@ module Rodakase
           part =
             case value
             when Array
-              part(key, key => value.map { |element| part(el_key, el_key => element) })
+              part(key, value.map { |element| part(el_key, element) })
             else
-              part(el_key, el_key => value)
+              part(el_key, value)
             end
 
           result[key] = part
+        end.reduce(method(:part)) do |part, (key, value)|
+          part.(key, value)
         end
       end
 
       def part(name, value)
-        Part.new(renderer.chdir(partial_dirname), name, value, Scope.new(value))
+        Part.new(renderer.chdir(partial_dirname), name => value)
       end
     end
   end

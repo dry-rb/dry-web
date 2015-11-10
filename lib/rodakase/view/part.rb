@@ -1,14 +1,12 @@
 module Rodakase
   module View
     class Part
-      attr_reader :renderer, :_name, :_data, :_scope, :_value
+      attr_reader :renderer, :_data, :_value
 
-      def initialize(renderer, name, data, scope)
+      def initialize(renderer, data)
         @renderer = renderer
-        @_name = name
         @_data = data
         @_value = data.values[0]
-        @_scope = scope
       end
 
       def [](key)
@@ -20,7 +18,7 @@ module Rodakase
       end
 
       def render(path, &block)
-        renderer.render(path, _scope, &block)
+        renderer.render(path, self, &block)
       end
 
       def template?(name)
@@ -38,8 +36,10 @@ module Rodakase
 
         if template_path
           render(template_path, &block)
-        elsif _value.key?(meth)
-          _value[meth]
+        elsif _data.key?(meth)
+          _data[meth]
+        elsif _value.respond_to?(meth)
+          _value.public_send(meth, *args, &block)
         else
           super
         end

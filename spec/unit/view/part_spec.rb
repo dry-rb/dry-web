@@ -2,12 +2,11 @@ require 'rodakase/view/part'
 
 RSpec.describe Rodakase::View::Part do
   subject(:part) do
-    Rodakase::View::Part.new(renderer, name, data, scope)
+    Rodakase::View::Part.new(renderer, data)
   end
 
   let(:name) { :user }
   let(:data) { { user: { email: 'jane@doe.org' } } }
-  let(:scope) { double(:scope) }
 
   let(:renderer) { double(:renderer) }
 
@@ -19,7 +18,7 @@ RSpec.describe Rodakase::View::Part do
 
   describe '#render' do
     it 'renders given template' do
-      expect(renderer).to receive(:render).with('row.slim', scope)
+      expect(renderer).to receive(:render).with('row.slim', part)
 
       part.render('row.slim')
     end
@@ -36,7 +35,7 @@ RSpec.describe Rodakase::View::Part do
   describe '#method_missing' do
     it 'renders template' do
       expect(renderer).to receive(:lookup).with('_row').and_return('_row.slim')
-      expect(renderer).to receive(:render).with('_row.slim', scope)
+      expect(renderer).to receive(:render).with('_row.slim', part)
 
       part.row
     end
@@ -47,8 +46,8 @@ RSpec.describe Rodakase::View::Part do
       expect(renderer).to receive(:lookup).with('_form').and_return('form.slim')
       expect(renderer).to receive(:lookup).with('_fields').and_return('fields.slim')
 
-      expect(renderer).to receive(:render).with('form.slim', scope, &block)
-      expect(renderer).to receive(:render).with('fields.slim', scope)
+      expect(renderer).to receive(:render).with('form.slim', part, &block)
+      expect(renderer).to receive(:render).with('fields.slim', part)
 
       part.form(block)
     end

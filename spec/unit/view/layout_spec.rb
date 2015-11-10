@@ -18,12 +18,12 @@ RSpec.describe Rodakase::View::Layout do
     Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), engine: :slim)
   end
 
-  let(:scope) do
-    double(:scope, title: 'Test')
+  let(:page) do
+    double(:page, title: 'Test')
   end
 
   let(:options) do
-    { scope: scope, locals: { user: { name: 'Jane' } } }
+    { scope: page, locals: { user: { name: 'Jane' } } }
   end
 
   describe '#call' do
