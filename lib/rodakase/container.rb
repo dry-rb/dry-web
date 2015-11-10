@@ -8,7 +8,7 @@ module Rodakase
   class Container
     extend Dry::Container::Mixin
 
-    setting :root
+    setting :root, Pathname.pwd.freeze
     setting :auto_load
     setting :app
 
@@ -20,11 +20,13 @@ module Rodakase
 
       response = yield(self)
 
+      load_paths!('core')
+
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
       Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
       if response == self && config.auto_load
-        auto_load!(lib_path)
+        Array(config.auto_load).each(&method(:auto_load!))
         auto_loaded_paths.each(&method(:require))
       end
 
@@ -36,17 +38,18 @@ module Rodakase
       Dry::AutoInject.new { container(container) }
     end
 
-    def self.auto_load!(source_path, &block)
-      Dir[source_path.join('**/*.rb')].each do |path|
-        component_path = (path.to_s.split('/') - lib_path.to_s.split('/'))
-          .join('/').gsub('.rb', '')
+    def self.auto_load!(dir, &block)
+      dir_root = root.join(dir.to_s.split('/')[0])
+
+      Dir["#{root}/#{dir}/**/*.rb"].each do |path|
+        component_path = path.to_s.gsub("#{dir_root}/", '').gsub('.rb', '')
 
         klass_name = Inflecto.camelize(component_path)
         identifier = component_path.gsub('/', '.')
 
         next if _container.key?(identifier)
 
-        auto_loaded_paths << lib_path.join(component_path).to_s
+        auto_loaded_paths << dir_root.join(component_path).to_s
 
         if block
           register(identifier, yield(klass_name))
@@ -64,8 +67,8 @@ module Rodakase
       config.root
     end
 
-    def self.lib_path
-      root.join('lib')
+    def self.load_paths!(*dirs)
+      dirs.each { |dir| $LOAD_PATH.unshift(root.join(dir)) }
     end
 
     def self.auto_loaded_paths

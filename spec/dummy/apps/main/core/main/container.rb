@@ -1,9 +1,8 @@
 module Main
   class Container < Dummy::Container
     setting :root, Pathname(__FILE__).join('../..').realpath.dirname.freeze
-    setting :auto_load, true
+    setting :auto_load, 'lib'
 
-    $LOAD_PATH.unshift(root.join('core'))
-    $LOAD_PATH.unshift(root.join('lib'))
+    load_paths!('lib')
   end
 end

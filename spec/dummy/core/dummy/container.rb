@@ -2,9 +2,10 @@ require 'rodakase/container'
 
 module Dummy
   class Container < Rodakase::Container
-    setting :root, Pathname(__FILE__).join('../..').realpath.dirname.freeze
+    # we need to override default here because we run tests from within the
+    # project root and our app is in spec/dummy
+    setting :root, Pathname(__FILE__).dirname.join('../..')
 
-    $LOAD_PATH.unshift(root.join('lib').to_s)
-    $LOAD_PATH.unshift(root.join('core').to_s)
+    load_paths!('lib')
   end
 end
