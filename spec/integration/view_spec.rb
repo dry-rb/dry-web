@@ -15,7 +15,7 @@ RSpec.describe 'Rodakase View' do
   end
 
   let(:renderer) do
-    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), 'slim')
+    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), engine: :slim)
   end
 
   let(:scope) do
@@ -31,7 +31,7 @@ RSpec.describe 'Rodakase View' do
     ]
 
     expect(view.(scope: scope, locals: { users: users })).to eql(
-      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><div class="users"><table><tr><td>Jane</td><td>jane@doe.org</td></tr><tr><td>Joe</td><td>joe@doe.org</td></tr></table></div></body></html>'
+      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><div class="users"><table><tbody><tr><td>Jane</td><td>jane@doe.org</td></tr><tr><td>Joe</td><td>joe@doe.org</td></tr></tbody></table></div></body></html>'
     )
   end
 

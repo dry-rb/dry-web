@@ -18,7 +18,7 @@ module Rodakase
           yield(config)
 
           unless config.renderer
-            config.renderer = Renderer.new(config.root, config.engine)
+            config.renderer = Renderer.new(config.root, engine: config.engine)
           end
         end
       end

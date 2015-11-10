@@ -15,7 +15,7 @@ RSpec.describe Rodakase::View::Layout do
   end
 
   let(:renderer) do
-    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), 'slim')
+    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), engine: :slim)
   end
 
   let(:scope) do

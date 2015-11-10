@@ -19,24 +19,24 @@ RSpec.describe Rodakase::View::Part do
 
   describe '#render' do
     it 'renders given template' do
-      expect(renderer).to receive(:call).with('_row', scope)
+      expect(renderer).to receive(:render).with('row.slim', scope)
 
-      part.render('row')
+      part.render('row.slim')
     end
   end
 
   describe '#template?' do
     it 'asks renderer if there is a valid template for a given identifier' do
-      expect(renderer).to receive(:template?).with('_row').and_return(true)
+      expect(renderer).to receive(:lookup).with('_row').and_return('row.slim')
 
-      expect(part.template?('row')).to be(true)
+      expect(part.template?('row')).to eql('row.slim')
     end
   end
 
   describe '#method_missing' do
     it 'renders template' do
-      expect(renderer).to receive(:template?).with('_row').and_return(true)
-      expect(renderer).to receive(:call).with('_row', scope)
+      expect(renderer).to receive(:lookup).with('_row').and_return('_row.slim')
+      expect(renderer).to receive(:render).with('_row.slim', scope)
 
       part.row
     end
@@ -44,11 +44,11 @@ RSpec.describe Rodakase::View::Part do
     it 'renders template within another when block is passed' do
       block = proc { part.fields }
 
-      expect(renderer).to receive(:template?).with('_form').and_return(true)
-      expect(renderer).to receive(:template?).with('_fields').and_return(true)
+      expect(renderer).to receive(:lookup).with('_form').and_return('form.slim')
+      expect(renderer).to receive(:lookup).with('_fields').and_return('fields.slim')
 
-      expect(renderer).to receive(:call).with('_form', scope, &block)
-      expect(renderer).to receive(:call).with('_fields', scope)
+      expect(renderer).to receive(:render).with('form.slim', scope, &block)
+      expect(renderer).to receive(:render).with('fields.slim', scope)
 
       part.form(block)
     end

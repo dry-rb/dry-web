@@ -19,23 +19,25 @@ module Rodakase
         _value.each(&block)
       end
 
-      def render(name, &block)
-        renderer.("_#{name}", _scope, &block)
+      def render(path, &block)
+        renderer.render(path, _scope, &block)
       end
 
       def template?(name)
-        renderer.template?("_#{name}")
+        renderer.lookup("_#{name}")
       end
 
-      def respond_to_missing?(name, include_private = false)
-        super || _data.key?(name) || template?(name)
+      def respond_to_missing?(meth, include_private = false)
+        super || _data.key?(meth) || template?(meth)
       end
 
       private
 
       def method_missing(meth, *args, &block)
-        if template?(meth)
-          render(meth, &block)
+        template_path = template?(meth)
+
+        if template_path
+          render(template_path, &block)
         elsif _value.key?(meth)
           _value[meth]
         else
