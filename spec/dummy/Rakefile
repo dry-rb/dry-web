@@ -2,7 +2,7 @@ require 'bundler'
 
 Bundler.setup
 
-require_relative 'core/container'
+require_relative 'core/boot'
 require 'rom/sql/rake_task'
 
 namespace :db do
