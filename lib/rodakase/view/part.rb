@@ -19,8 +19,8 @@ module Rodakase
         _value.each(&block)
       end
 
-      def render(name)
-        renderer.("_#{name}", _scope)
+      def render(name, &block)
+        renderer.("_#{name}", _scope, &block)
       end
 
       def template?(name)
@@ -31,9 +31,11 @@ module Rodakase
         super || _data.key?(name) || template?(name)
       end
 
+      private
+
       def method_missing(meth, *args, &block)
         if template?(meth)
-          render(meth)
+          render(meth, &block)
         elsif _value.key?(meth)
           _value[meth]
         else

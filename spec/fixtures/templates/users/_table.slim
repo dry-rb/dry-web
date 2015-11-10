@@ -1,3 +1,7 @@
 table
   - users.each do |user|
-    == user.row
+    == user.row do
+      td
+        == user[:name]
+      td
+        == user[:email]

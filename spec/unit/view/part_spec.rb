@@ -32,4 +32,25 @@ RSpec.describe Rodakase::View::Part do
       expect(part.template?('row')).to be(true)
     end
   end
+
+  describe '#method_missing' do
+    it 'renders template' do
+      expect(renderer).to receive(:template?).with('_row').and_return(true)
+      expect(renderer).to receive(:call).with('_row', scope)
+
+      part.row
+    end
+
+    it 'renders template within another when block is passed' do
+      block = proc { part.fields }
+
+      expect(renderer).to receive(:template?).with('_form').and_return(true)
+      expect(renderer).to receive(:template?).with('_fields').and_return(true)
+
+      expect(renderer).to receive(:call).with('_form', scope, &block)
+      expect(renderer).to receive(:call).with('_fields', scope)
+
+      part.form(block)
+    end
+  end
 end
