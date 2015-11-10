@@ -5,12 +5,17 @@ module Rodakase
     class Renderer
       TemplateNotFoundError = Class.new(StandardError)
 
-      attr_reader :dir, :root, :engine
+      attr_reader :dir, :root, :engine, :tilts
+
+      def self.tilts
+        @__engines__ ||= {}
+      end
 
       def initialize(dir, options = {})
         @dir = dir
         @root = options.fetch(:root, dir)
         @engine = options[:engine]
+        @tilts = self.class.tilts
       end
 
       def call(template, scope, &block)
@@ -24,7 +29,11 @@ module Rodakase
       end
 
       def render(path, scope, &block)
-        Tilt.new(path).render(scope, &block)
+        tilt(path).render(scope, &block)
+      end
+
+      def tilt(path)
+        tilts.fetch(path) { tilts[path] = Tilt.new(path) }
       end
 
       def lookup(name)
