@@ -1,6 +1,10 @@
+require 'equalizer'
+
 module Rodakase
   module View
     class Part
+      include Equalizer.new(:renderer, :_data, :_value)
+
       attr_reader :renderer, :_data, :_value
 
       def initialize(renderer, data)

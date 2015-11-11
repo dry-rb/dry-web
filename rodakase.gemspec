@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "dry-container"
   spec.add_runtime_dependency "dry-auto_inject"
   spec.add_runtime_dependency "transflow"
+  spec.add_runtime_dependency "equalizer"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"

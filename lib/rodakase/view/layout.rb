@@ -1,10 +1,13 @@
 require 'dry-configurable'
+require 'equalizer'
 
 require 'rodakase/view/part'
 
 module Rodakase
   module View
     class Layout
+      include Equalizer.new(:config)
+
       Scope = Struct.new(:page)
 
       extend Dry::Configurable

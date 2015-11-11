@@ -1,8 +1,11 @@
 require 'tilt'
+require 'equalizer'
 
 module Rodakase
   module View
     class Renderer
+      include Equalizer.new(:dir, :root, :engine)
+
       TemplateNotFoundError = Class.new(StandardError)
 
       attr_reader :dir, :root, :engine, :tilts
