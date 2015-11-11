@@ -28,7 +28,7 @@ module Rodakase
 
       if response == self && config.auto_register
         Array(config.auto_register).each(&method(:auto_register!))
-        auto_registered_paths.each(&method(:require))
+        auto_registered_paths.each(&Kernel.method(:require))
       end
 
       freeze
@@ -55,13 +55,19 @@ module Rodakase
         if block
           register(identifier, yield(klass_name))
         else
-          register(identifier) do
-            Inflecto.constantize(klass_name).new
-          end
+          register(identifier) { const(klass_name).new }
         end
       end
 
       self
+    end
+
+    def self.require(*paths)
+      paths.flat_map { |path| Dir[root.join(path)] }.each { |path| Kernel.require path }
+    end
+
+    def self.const(name)
+      Inflecto.constantize(name)
     end
 
     def self.root
