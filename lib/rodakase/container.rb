@@ -10,7 +10,7 @@ module Rodakase
 
     setting :env, ENV.fetch('RACK_ENV', :development).to_sym
     setting :root, Pathname.pwd.freeze
-    setting :auto_load
+    setting :auto_register
     setting :app
 
     def self.configure(env = config.env, &block)
@@ -26,9 +26,9 @@ module Rodakase
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
       Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
-      if response == self && config.auto_load
-        Array(config.auto_load).each(&method(:auto_load!))
-        auto_loaded_paths.each(&method(:require))
+      if response == self && config.auto_register
+        Array(config.auto_register).each(&method(:auto_register!))
+        auto_registered_paths.each(&method(:require))
       end
 
       freeze
@@ -39,7 +39,7 @@ module Rodakase
       Dry::AutoInject.new { container(container) }
     end
 
-    def self.auto_load!(dir, &block)
+    def self.auto_register!(dir, &block)
       dir_root = root.join(dir.to_s.split('/')[0])
 
       Dir["#{root}/#{dir}/**/*.rb"].each do |path|
@@ -50,7 +50,7 @@ module Rodakase
 
         next if _container.key?(identifier)
 
-        auto_loaded_paths << dir_root.join(component_path).to_s
+        auto_registered_paths << dir_root.join(component_path).to_s
 
         if block
           register(identifier, yield(klass_name))
@@ -72,8 +72,8 @@ module Rodakase
       dirs.each { |dir| $LOAD_PATH.unshift(root.join(dir)) }
     end
 
-    def self.auto_loaded_paths
-      @_auto_loaded_paths ||= []
+    def self.auto_registered_paths
+      @_auto_registered_paths ||= []
     end
   end
 end
