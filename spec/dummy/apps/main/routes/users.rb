@@ -1,6 +1,6 @@
 class Main::Application < Rodakase::Application
   route('users') do |r|
-    r.get(to: 'ui.users.index')
+    r.get(to: 'views.users.index')
 
     r.resolve('requests.users.create') do |t|
       r.post do

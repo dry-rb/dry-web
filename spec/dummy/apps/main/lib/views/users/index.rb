@@ -1,6 +1,6 @@
 require 'main/view'
 
-module Ui
+module Views
   module Users
     class Index < Main::View
       configure do |config|
