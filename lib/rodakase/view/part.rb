@@ -1,9 +1,9 @@
-require 'equalizer'
+require 'dry-equalizer'
 
 module Rodakase
   module View
     class Part
-      include Equalizer.new(:renderer, :_data, :_value)
+      include Dry::Equalizer(:renderer, :_data, :_value)
 
       attr_reader :renderer, :_data, :_value
 

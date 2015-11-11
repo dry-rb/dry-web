@@ -1,10 +1,10 @@
 require 'tilt'
-require 'equalizer'
+require 'dry-equalizer'
 
 module Rodakase
   module View
     class Renderer
-      include Equalizer.new(:dir, :root, :engine)
+      include Dry::Equalizer(:dir, :root, :engine)
 
       TemplateNotFoundError = Class.new(StandardError)
 
