@@ -2,6 +2,7 @@ require 'dry-configurable'
 require 'dry-equalizer'
 
 require 'rodakase/view/part'
+require 'rodakase/view/renderer'
 
 module Rodakase
   module View
