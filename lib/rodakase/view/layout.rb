@@ -40,14 +40,19 @@ module Rodakase
       end
 
       def call(options = {})
-        layout_scope = Scope.new(
+        renderer.(path, layout_scope(options)) do
+          renderer.(template, template_scope(options))
+        end
+      end
+
+      def layout_scope(options)
+        Scope.new(
           Part.new(renderer.chdir('layouts'), page: options.fetch(:scope, scope))
         )
+      end
 
-        renderer.(path, layout_scope) do
-          template_scope = parts(locals(options))
-          renderer.(template, template_scope)
-        end
+      def template_scope(options)
+        parts(locals(options))
       end
 
       def locals(options)
