@@ -85,7 +85,13 @@ module Rodakase
     end
 
     def self.require(*paths)
-      paths.flat_map { |path| Dir[root.join(path)] }.each { |path| Kernel.require path }
+      paths
+        .flat_map { |path|
+          path.include?('*') ? Dir[root.join(path)] : root.join(path)
+        }
+        .each { |path|
+          Kernel.require path
+        }
     end
 
     def self.load_component(key)

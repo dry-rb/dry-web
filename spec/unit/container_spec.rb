@@ -15,6 +15,21 @@ RSpec.describe Rodakase::Container do
     end
   end
 
+  describe '.require' do
+    it 'requires a single file' do
+      Test::Container.require('lib/test/models')
+
+      expect(Test.const_defined?(:Models)).to be(true)
+    end
+
+    it 'requires many files when glob pattern is passed' do
+      Test::Container.require('lib/test/models/*.rb')
+
+      expect(Test::Models.const_defined?(:User)).to be(true)
+      expect(Test::Models.const_defined?(:Book)).to be(true)
+    end
+  end
+
   describe '.require_component' do
     it 'requires components from configured load paths' do
       Test::Container.require_component('test.foo')
