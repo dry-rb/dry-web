@@ -32,7 +32,7 @@ GIT
 
 GIT
   remote: git://github.com/rom-rb/rom-sql.git
-  revision: 4aef266522c1ab95e2fbe91272af240b363507ce
+  revision: 0a17586961eb2d02d74e4b34d31f64ce3bf99d66
   branch: master
   specs:
     rom-sql (0.7.0.beta1)
@@ -71,9 +71,11 @@ PATH
     rodakase (0.0.1)
       dry-auto_inject
       dry-container
+      equalizer
       inflecto
       roda
       tilt
+      transflow
 
 GEM
   remote: https://rubygems.org/
@@ -115,6 +117,7 @@ GEM
       dry-container (~> 0.2)
       inflecto (~> 0.0.0, >= 0.0.2)
       kleisli (~> 0.2)
+    dry-pipeline (0.0.1)
     equalizer (0.0.11)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -134,6 +137,10 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.1)
+    transflow (0.3.0)
+      dry-pipeline
+      kleisli
+      wisper
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     virtus (1.0.5)
