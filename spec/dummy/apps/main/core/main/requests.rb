@@ -1,4 +1,4 @@
-require 'main/container'
+require_relative 'container'
 
 module Main
   module Requests

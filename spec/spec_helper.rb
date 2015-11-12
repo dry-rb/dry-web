@@ -25,6 +25,8 @@ require 'database_cleaner'
 
 DatabaseCleaner[:sequel, connection: Helpers.db_conn].strategy = :transaction
 
+module Test; end
+
 RSpec.configure do |config|
   config.disable_monkey_patching!
 
@@ -37,7 +39,7 @@ RSpec.configure do |config|
   config.include Helpers
 
   config.before do
-    @constants = Object.constants
+    @test_constants = Test.constants
   end
 
   config.around do |e|
@@ -45,7 +47,7 @@ RSpec.configure do |config|
   end
 
   config.after do
-    added_constants = Object.constants - @constants
-    added_constants.each { |name| Object.send(:remove_const, name) }
+    added_constants = Test.constants - @test_constants
+    added_constants.each { |name| Test.send(:remove_const, name) }
   end
 end

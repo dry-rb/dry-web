@@ -1,8 +1,12 @@
+require 'rodakase/container'
+
 module Main
-  class Container < Dummy::Container
+  class Container < Rodakase::Container
     setting :root, Pathname(__FILE__).join('../..').realpath.dirname.freeze
     setting :auto_register, 'lib'
 
-    load_paths!('lib')
+    configure do
+      load_paths!('lib')
+    end
   end
 end

@@ -14,21 +14,34 @@ module Rodakase
     setting :app
 
     def self.configure(env = config.env, &block)
-      super() do |config|
-        app_config = Config.load(root, env)
-        config.app = app_config if app_config
+      if !configured?
+        super() do |config|
+          app_config = Config.load(root, env)
+          config.app = app_config if app_config
+        end
+
+        load_paths!('core')
+
+        @_configured = true
       end
 
-      response = yield(self)
+      yield(self)
 
-      load_paths!('core')
+      self
+    end
+
+    def self.configured?
+      @_configured
+    end
+
+    def self.finalize!(&block)
+      yield(self) if block
 
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
       Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
-      if response == self && config.auto_register
+      if config.auto_register
         Array(config.auto_register).each(&method(:auto_register!))
-        auto_registered_paths.each(&Kernel.method(:require))
       end
 
       freeze
@@ -36,7 +49,12 @@ module Rodakase
 
     def self.import_module
       container = self
-      Dry::AutoInject.new { container(container) }
+      auto_inject = Dry::AutoInject.new { container(container) }
+
+      -> *keys {
+        keys.each { |key| load_component(key) unless key?(key) }
+        auto_inject[*keys]
+      }
     end
 
     def self.auto_register!(dir, &block)
@@ -48,9 +66,9 @@ module Rodakase
         klass_name = Inflecto.camelize(component_path)
         identifier = component_path.gsub('/', '.')
 
-        next if _container.key?(identifier)
+        next if key?(identifier)
 
-        auto_registered_paths << dir_root.join(component_path).to_s
+        Kernel.require dir_root.join(component_path)
 
         if block
           register(identifier, yield(klass_name))
@@ -62,12 +80,32 @@ module Rodakase
       self
     end
 
+    def self.boot!(component)
+      require "core/boot/#{component}.rb"
+    end
+
     def self.require(*paths)
       paths.flat_map { |path| Dir[root.join(path)] }.each { |path| Kernel.require path }
     end
 
+    def self.load_component(key)
+      require_component(key) { |klass| register(key) { klass.new } }
+    end
+
+    def self.require_component(key, &block)
+      file = "#{key.gsub('.', '/')}.rb"
+      path = load_paths.detect { |p| p.join(file).exist? }
+
+      if path
+        Kernel.require path.join(file).to_s
+        yield(const(key)) if block
+      else
+        raise ArgumentError, "could not resolve require file for #{key}"
+      end
+    end
+
     def self.const(name)
-      Inflecto.constantize(name)
+      Inflecto.constantize(Inflecto.camelize(name.gsub('.', '/')))
     end
 
     def self.root
@@ -75,11 +113,16 @@ module Rodakase
     end
 
     def self.load_paths!(*dirs)
-      dirs.each { |dir| $LOAD_PATH.unshift(root.join(dir)) }
+      dirs.map(&:to_s).each do |dir|
+        path = root.join(dir)
+        load_paths << path
+        $LOAD_PATH.unshift(path.to_s)
+      end
+      self
     end
 
-    def self.auto_registered_paths
-      @_auto_registered_paths ||= []
+    def self.load_paths
+      @_load_paths ||= []
     end
   end
 end

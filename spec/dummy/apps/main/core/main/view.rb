@@ -1,5 +1,5 @@
-require 'main/container'
 require 'rodakase/view'
+require_relative 'container'
 
 module Main
   class Page

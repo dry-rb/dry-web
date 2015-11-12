@@ -1,6 +1,6 @@
 require_relative 'main/container'
 
-Main::Container.configure do |container|
+Main::Container.finalize! do |container|
   container.auto_register!('lib/persistence/repositories') do |repo_class|
     -> { container.const(repo_class).new(container['persistence.rom']) }
   end

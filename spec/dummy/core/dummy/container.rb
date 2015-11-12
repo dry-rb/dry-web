@@ -6,6 +6,8 @@ module Dummy
     # project root and our app is in spec/dummy
     setting :root, Pathname(__FILE__).dirname.join('../..')
 
-    load_paths!('lib')
+    configure do
+      load_paths!('lib')
+    end
   end
 end
