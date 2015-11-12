@@ -28,27 +28,26 @@ module Rodakase
         end
       end
 
-      attr_reader :config, :renderer, :scope, :path, :template, :partial_dirname
+      attr_reader :config, :renderer, :scope,
+        :layout_dir, :layout_path, :template_path
 
       def initialize
         @config = self.class.config
         @renderer = @config.renderer
-        @path = "layouts/#{config.name}"
-        @template = "#{config.template}"
-        @partial_dirname = config.template
+        @layout_dir = "layouts"
+        @layout_path = "#{layout_dir}/#{config.name}"
+        @template_path = config.template
         @scope = config.scope
       end
 
       def call(options = {})
-        renderer.(path, layout_scope(options)) do
-          renderer.(template, template_scope(options))
+        renderer.(layout_path, layout_scope(options)) do
+          renderer.(template_path, template_scope(options))
         end
       end
 
       def layout_scope(options)
-        Scope.new(
-          Part.new(renderer.chdir('layouts'), page: options.fetch(:scope, scope))
-        )
+        Scope.new(layout_part(:page, options.fetch(:scope, scope)))
       end
 
       def template_scope(options)
@@ -68,19 +67,27 @@ module Rodakase
           part =
             case value
             when Array
-              part(key, value.map { |element| part(el_key, element) })
+              template_part(key, value.map { |element| template_part(el_key, element) })
             else
-              part(el_key, value)
+              template_part(el_key, value)
             end
 
           result[key] = part
-        end.reduce(method(:part)) do |part, (key, value)|
+        end.reduce(method(:template_part)) do |part, (key, value)|
           part.(key, value)
         end
       end
 
-      def part(name, value)
-        Part.new(renderer.chdir(partial_dirname), name => value)
+      def layout_part(name, value)
+        part(layout_dir, name, value)
+      end
+
+      def template_part(name, value)
+        part(template_path, name, value)
+      end
+
+      def part(dir, name, value)
+        Part.new(renderer.chdir(dir), name => value)
       end
     end
   end
