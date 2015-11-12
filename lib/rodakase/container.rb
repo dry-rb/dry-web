@@ -39,7 +39,6 @@ module Rodakase
       yield(self) if block
 
       Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
-      Dir[root.join('core/container/**/*.rb')].each(&method(:require))
 
       if config.auto_register
         Array(config.auto_register).each(&method(:auto_register!))
