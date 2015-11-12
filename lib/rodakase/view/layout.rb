@@ -62,14 +62,13 @@ module Rodakase
         return DEFAULT_SCOPE unless locals.any?
 
         locals.each_with_object({}) do |(key, value), result|
-          el_key = Inflecto.singularize(key).to_sym
-
           part =
             case value
             when Array
+              el_key = Inflecto.singularize(key).to_sym
               template_part(key, value.map { |element| template_part(el_key, element) })
             else
-              template_part(el_key, value)
+              template_part(key, value)
             end
 
           result[key] = part
