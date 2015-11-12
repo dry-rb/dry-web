@@ -2,6 +2,7 @@ require 'inflecto'
 require 'dry-container'
 require 'dry-auto_inject'
 
+require 'rodakase/component'
 require 'rodakase/config'
 
 module Rodakase
@@ -62,26 +63,24 @@ module Rodakase
 
       Dir["#{root}/#{dir}/**/*.rb"].each do |path|
         component_path = path.to_s.gsub("#{dir_root}/", '').gsub('.rb', '')
+        component = Rodakase.Component(component_path)
 
-        klass_name = Inflecto.camelize(component_path)
-        identifier = component_path.gsub('/', '.')
+        next if key?(component.identifier)
 
-        next if key?(identifier)
-
-        Kernel.require dir_root.join(component_path)
+        Kernel.require component.path
 
         if block
-          register(identifier, yield(klass_name))
+          register(component.identifier, yield(component.constant))
         else
-          register(identifier) { const(klass_name).new }
+          register(component.identifier) { component.instance }
         end
       end
 
       self
     end
 
-    def self.boot!(component)
-      require "core/boot/#{component}.rb"
+    def self.boot!(name)
+      require "core/boot/#{name}.rb"
     end
 
     def self.require(*paths)
@@ -99,19 +98,15 @@ module Rodakase
     end
 
     def self.require_component(key, &block)
-      file = "#{key.gsub('.', '/')}.rb"
-      path = load_paths.detect { |p| p.join(file).exist? }
+      component = Rodakase.Component(key)
+      path = load_paths.detect { |p| p.join(component.file).exist? }
 
       if path
-        Kernel.require path.join(file).to_s
-        yield(const(key)) if block
+        Kernel.require component.path
+        yield(component.constant) if block
       else
         raise ArgumentError, "could not resolve require file for #{key}"
       end
-    end
-
-    def self.const(name)
-      Inflecto.constantize(Inflecto.camelize(name.gsub('.', '/')))
     end
 
     def self.root
