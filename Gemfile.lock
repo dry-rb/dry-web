@@ -15,13 +15,6 @@ GIT
       thread_safe
 
 GIT
-  remote: git://github.com/dryrb/dry-equalizer.git
-  revision: dfa9de7270e1116cc0dc0b4ccc02b1d4e9845dce
-  branch: master
-  specs:
-    dry-equalizer (0.1.0)
-
-GIT
   remote: git://github.com/rom-rb/rom-mapper.git
   revision: e07b7f5a89f0b57fcfe076f45ed729dec9e626ff
   branch: master
@@ -104,7 +97,7 @@ PATH
     rodakase (0.0.1)
       dry-auto_inject
       dry-container
-      equalizer
+      dry-equalizer
       inflecto
       roda
       tilt
@@ -163,6 +156,7 @@ GEM
       dry-container (~> 0.2)
       inflecto (~> 0.0.0, >= 0.0.2)
       kleisli (~> 0.2)
+    dry-equalizer (0.1.0)
     dry-pipeline (0.0.1)
     equalizer (0.0.11)
     erubis (2.7.0)
@@ -245,8 +239,6 @@ DEPENDENCIES
   dry-auto_inject!
   dry-container!
   dry-data
-  dry-equalizer!
-  equalizer
   pg
   pry
   rack-test
