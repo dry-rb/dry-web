@@ -48,8 +48,7 @@ module Rodakase
     end
 
     def self.import_module
-      container = self
-      auto_inject = Dry::AutoInject.new { container(container) }
+      auto_inject = Dry::AutoInject(self)
 
       -> *keys {
         keys.each { |key| load_component(key) unless key?(key) }

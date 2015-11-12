@@ -8,7 +8,6 @@ gem 'rack-test'
 gem 'slim'
 gem 'transflow', github: 'solnic/transflow', branch: 'master'
 gem 'dry-container', github: 'dryrb/dry-container', branch: 'master'
-gem 'dry-auto_inject', github: 'dryrb/dry-auto_inject', branch: 'master'
 
 gem 'pry'
 gem 'pg'

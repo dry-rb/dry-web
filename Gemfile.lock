@@ -1,11 +1,4 @@
 GIT
-  remote: git://github.com/dryrb/dry-auto_inject.git
-  revision: 15aa6ba225c9628089202c5634c51a23b4c19a14
-  branch: master
-  specs:
-    dry-auto_inject (0.0.1)
-
-GIT
   remote: git://github.com/dryrb/dry-container.git
   revision: 626499ceb65a4c6120c8f687b36a79443746ac3b
   branch: master
@@ -150,6 +143,7 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     diff-lcs (1.2.5)
+    dry-auto_inject (0.1.0)
     dry-configurable (0.1.2)
       thread_safe
     dry-data (0.0.1)
@@ -236,7 +230,6 @@ DEPENDENCIES
   byebug
   capybara
   database_cleaner
-  dry-auto_inject!
   dry-container!
   dry-data
   pg
