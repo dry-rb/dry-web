@@ -33,4 +33,17 @@ RSpec.describe Rodakase::View::Layout do
       )
     end
   end
+
+  describe '#parts' do
+    it 'returns view parts' do
+      part = layout.parts(user: { id: 1, name: 'Jane' })
+
+      expect(part[:id]).to be(1)
+      expect(part[:name]).to eql('Jane')
+    end
+
+    it 'returns default scope when empty locals are passed' do
+      expect(layout.parts({})).to be(layout.class::DEFAULT_SCOPE)
+    end
+  end
 end

@@ -9,6 +9,7 @@ module Rodakase
       include Dry::Equalizer(:config)
 
       Scope = Struct.new(:page)
+      DEFAULT_SCOPE = Object.new.freeze
 
       extend Dry::Configurable
 
@@ -54,6 +55,8 @@ module Rodakase
       end
 
       def parts(locals)
+        return DEFAULT_SCOPE unless locals.any?
+
         locals.each_with_object({}) do |(key, value), result|
           el_key = Inflecto.singularize(key).to_sym
 
