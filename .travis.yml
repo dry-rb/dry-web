@@ -2,6 +2,8 @@ language: ruby
 sudo: false
 cache: bundler
 bundler_args: --without tools benchmarks
+before_script:
+  - psql -c 'create database rodakase;' -U postgres
 script:
   - bundle exec rake spec
 rvm:
