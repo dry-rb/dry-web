@@ -6,7 +6,7 @@
 
 # Rodakase [![Join the chat at https://gitter.im/solnic/rodakase](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/solnic/rodakase?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Gem Version](https://badge.fury.io/rb/rom.svg)][gem]
+[![Gem Version](https://badge.fury.io/rb/rodakase.svg)][gem]
 [![Build Status](https://travis-ci.org/solnic/rodakase.svg?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/solnic/rodakase.svg)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/solnic/rodakase/badges/gpa.svg)][codeclimate]
