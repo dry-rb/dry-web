@@ -11,9 +11,9 @@ end
 
 module Main
   class View < Rodakase::View::Layout
-    setting :root, Container.root.join('templates')
+    setting :root, Container.root.join('web/templates')
     setting :scope, Page.new
     setting :engine, :slim
-    setting :name, 'app'
+    setting :name, 'app'.freeze
   end
 end

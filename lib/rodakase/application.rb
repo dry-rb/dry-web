@@ -6,6 +6,7 @@ module Rodakase
     extend Dry::Configurable
 
     setting :container
+    setting :routes
 
     plugin :multi_route
     plugin :all_verbs
@@ -21,7 +22,7 @@ module Rodakase
     end
 
     def self.load_routes!
-      Dir[root.join('routes/**/*.rb')].each { |f| require f }
+      Dir[root.join("#{config.routes}/**/*.rb")].each { |f| require f }
     end
 
     def self.root

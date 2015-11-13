@@ -17,9 +17,11 @@ module Rodakase
       extend Dry::Configurable
 
       setting :engine
+      setting :root
       setting :renderer
       setting :name
       setting :template
+      setting :scope
 
       def self.configure(&block)
         super do |config|

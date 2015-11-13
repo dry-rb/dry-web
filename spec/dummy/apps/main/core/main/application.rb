@@ -3,7 +3,10 @@ require_relative 'container'
 
 module Main
   class Application < Rodakase::Application
-    setting :container, Main::Container
+    configure do |config|
+      config.routes = 'web/routes'.freeze
+      config.container = Main::Container
+    end
 
     route do |r|
       r.multi_route
