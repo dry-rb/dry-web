@@ -6,8 +6,8 @@ gemspec
 gem 'byebug', platform: :mri
 gem 'rack-test'
 gem 'slim'
+gem 'anima', '~> 0.2.0' # >= 0.3.0 requires MRI >= 2.2
 
-gem 'pry'
 gem 'pg'
 gem 'database_cleaner'
 gem 'dry-data'
@@ -18,6 +18,10 @@ gem 'rom-sql', github: 'rom-rb/rom-sql', branch: 'master'
 gem 'rom-support', github: 'rom-rb/rom-support', branch: 'master'
 gem 'rom-mapper', github: 'rom-rb/rom-mapper', branch: 'master'
 gem 'rom-model', github: 'rom-rb/rom-model', branch: 'master'
+
+group :tools do
+  gem 'pry'
+end
 
 group :benchmarks do
   gem 'benchmark-ips'
