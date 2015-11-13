@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rodakase', path: '../..'
+gem 'rodakase'
 gem 'pry'
 
 group :test do
