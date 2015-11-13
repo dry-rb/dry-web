@@ -5,7 +5,7 @@ bundler_args: --without tools benchmarks
 before_script:
   - psql -c 'create database rodakase;' -U postgres
 script:
-  - cd spec/dummy && bundle exec rake db:migrate
+  - bundle exec rake db:migrate
   - bundle exec rake spec
 rvm:
   - 2.0
