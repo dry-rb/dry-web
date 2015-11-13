@@ -69,13 +69,14 @@ PATH
   remote: .
   specs:
     rodakase (0.0.1)
-      dry-auto_inject
-      dry-container
-      dry-equalizer
+      dry-auto_inject (~> 0.1)
+      dry-configurable (~> 0.1)
+      dry-container (~> 0.2)
+      dry-equalizer (~> 0.1)
       inflecto
-      roda
-      tilt
-      transflow
+      roda (~> 2.7)
+      tilt (~> 2.0)
+      transflow (~> 0.3)
 
 GEM
   remote: https://rubygems.org/
