@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "inflecto"
   spec.add_runtime_dependency "roda", "~> 2.7"
   spec.add_runtime_dependency "tilt", "~> 2.0"
-  spec.add_runtime_dependency "dry-equalizer", "~> 0.1", ">= 0.1.1"
+  spec.add_runtime_dependency "dry-equalizer", "~> 0.2"
   spec.add_runtime_dependency "dry-container", "~> 0.2"
   spec.add_runtime_dependency "dry-configurable", "~> 0.1"
   spec.add_runtime_dependency "dry-auto_inject", "~> 0.1"
