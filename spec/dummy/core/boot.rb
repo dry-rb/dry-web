@@ -1,7 +1,5 @@
 require_relative 'dummy/container'
 
-require 'byebug'
-
 Dummy::Container.finalize! do |container|
   require 'logger'
   container.register(:logger, Logger.new(container.root.join('log/app.log')))
