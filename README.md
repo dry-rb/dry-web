@@ -1,4 +1,17 @@
+[gem]: https://rubygems.org/gems/rom
+[travis]: https://travis-ci.org/solnic/rodakase
+[gemnasium]: https://gemnasium.com/solnic/rodakase
+[codeclimate]: https://codeclimate.com/github/solnic/rodakase
+[inchpages]: http://inch-ci.org/github/solnic/rodakase/
+
 # Rodakase [![Join the chat at https://gitter.im/solnic/rodakase](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/solnic/rodakase?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+[![Gem Version](https://badge.fury.io/rb/rom.svg)][gem]
+[![Build Status](https://travis-ci.org/solnic/rodakase.svg?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/solnic/rodakase.svg)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/solnic/rodakase/badges/gpa.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/solnic/rodakase/badges/coverage.svg)][codeclimate]
+[![Inline docs](http://inch-ci.org/github/solnic/rodakase.svg?branch=master&style=flat)][inchpages]
 
 Rodakase is a lightweight web stack on top of Roda which gives you a foundation
 for building robust web applications while decoupling your application code from
