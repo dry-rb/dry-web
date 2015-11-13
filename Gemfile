@@ -9,7 +9,8 @@ group :test do
   gem 'slim'
   gem 'anima', '~> 0.2.0' # >= 0.3.0 requires MRI >= 2.2
 
-  gem 'pg'
+  gem 'pg', platforms: [:mri, :rbx]
+  gem 'pg_jruby', platform: :jruby
   gem 'database_cleaner'
 
   gem 'dry-data'
