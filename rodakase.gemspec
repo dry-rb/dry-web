@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Rodakase::VERSION
   spec.authors       = ["Piotr Solnica"]
   spec.email         = ["piotr.solnica@gmail.com"]
-  spec.summary       = "Experimental full-stack web framework on top of Roda"
+  spec.summary       = "Lightweight web application stack on top of Roda"
   spec.description   = spec.summary
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/solnic/rodakase"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
