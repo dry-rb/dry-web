@@ -1,12 +1,13 @@
+require 'main/import'
 require 'entities/user'
 
 module Persistence
   module Repositories
-    class Users < ROM::Repository
-      relations :users
+    class Users
+      include Main::Import(:db)
 
       def all
-        users.as(Entities::User).to_a
+        db[:users]
       end
     end
   end

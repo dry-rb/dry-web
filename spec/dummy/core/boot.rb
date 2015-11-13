@@ -6,6 +6,9 @@ Dummy::Container.finalize! do |container|
 
   require 'rodakase/transaction'
   container.register(:transaction, Rodakase::Transaction::Composer.new(container))
+
+  require 'persistence/db'
+  container.register(:db, Persistence::Db.new)
 end
 
 app_paths = Pathname(__FILE__).dirname.join('../apps').realpath.join('*')

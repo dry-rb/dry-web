@@ -10,7 +10,7 @@ RSpec.describe 'Rodakase Application' do
   end
 
   it 'sets up namespaced dependencies' do
-    expect(Main::Application['persistence.rom']).to be(ROM.container)
+    expect(Main::Application['persistence.repositories.users']).to be_instance_of(Persistence::Repositories::Users)
   end
 
   it 'sets up auto-injection mechanism' do

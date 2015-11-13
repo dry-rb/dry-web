@@ -1,13 +1,14 @@
-require 'dummy/import'
+require 'main/import'
+require 'entities/user'
 require 'transaction'
 
 module Transactions
   class RegisterUser < Transaction
-    include Dummy::Import('persistence.commands.create_user')
+    include Main::Import(:db)
 
     def call(params)
       if params['name']
-        success(create_user.(params))
+        success(db[:users] << Entities::User.new(*params.values_at('id', 'name')))
       else
         failure(:validation, 'name is missing')
       end

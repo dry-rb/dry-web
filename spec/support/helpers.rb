@@ -12,8 +12,4 @@ module Helpers
   def app
     Main::Application.app
   end
-
-  def db_conn
-    container['persistence.rom'].gateways[:default].connection
-  end
 end
