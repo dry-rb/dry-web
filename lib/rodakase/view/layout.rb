@@ -10,7 +10,9 @@ module Rodakase
       include Dry::Equalizer(:config)
 
       Scope = Struct.new(:page)
+
       DEFAULT_SCOPE = Object.new.freeze
+      DEFAULT_DIR = 'layouts'.freeze
 
       extend Dry::Configurable
 
@@ -35,7 +37,7 @@ module Rodakase
       def initialize
         @config = self.class.config
         @renderer = @config.renderer
-        @layout_dir = "layouts"
+        @layout_dir = DEFAULT_DIR
         @layout_path = "#{layout_dir}/#{config.name}"
         @template_path = config.template
         @scope = config.scope
