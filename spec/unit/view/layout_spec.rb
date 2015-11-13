@@ -23,13 +23,13 @@ RSpec.describe Rodakase::View::Layout do
   end
 
   let(:options) do
-    { scope: page, locals: { user: { name: 'Jane' } } }
+    { scope: page, locals: { user: { name: 'Jane' }, header: { title: 'User' } } }
   end
 
   describe '#call' do
     it 'renders template within the layout' do
       expect(layout.(options)).to eql(
-        '<!DOCTYPE html><html><head><title>Test</title></head><body><p>Jane</p></body></html>'
+        '<!DOCTYPE html><html><head><title>Test</title></head><body><h1>User</h1><p>Jane</p></body></html>'
       )
     end
   end

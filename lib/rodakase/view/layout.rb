@@ -62,7 +62,7 @@ module Rodakase
       def parts(locals)
         return DEFAULT_SCOPE unless locals.any?
 
-        locals.each_with_object({}) do |(key, value), result|
+        part_hash = locals.each_with_object({}) do |(key, value), result|
           part =
             case value
             when Array
@@ -73,21 +73,21 @@ module Rodakase
             end
 
           result[key] = part
-        end.reduce(method(:template_part)) do |part, (key, value)|
-          part.(key, value)
         end
+
+        part(template_path, part_hash)
       end
 
       def layout_part(name, value)
-        part(layout_dir, name, value)
+        part(layout_dir, name => value)
       end
 
       def template_part(name, value)
-        part(template_path, name, value)
+        part(template_path, name => value)
       end
 
-      def part(dir, name, value)
-        Part.new(renderer.chdir(dir), name => value)
+      def part(dir, value)
+        Part.new(renderer.chdir(dir), value)
       end
     end
   end
