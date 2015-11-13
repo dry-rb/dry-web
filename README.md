@@ -1,4 +1,4 @@
-[gem]: https://rubygems.org/gems/rom
+[gem]: https://rubygems.org/gems/rodakase
 [travis]: https://travis-ci.org/solnic/rodakase
 [gemnasium]: https://gemnasium.com/solnic/rodakase
 [codeclimate]: https://codeclimate.com/github/solnic/rodakase
