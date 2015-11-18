@@ -2,6 +2,7 @@ require 'dry-configurable'
 require 'dry-equalizer'
 
 require 'rodakase/view/part'
+require 'rodakase/view/null_part'
 require 'rodakase/view/renderer'
 
 module Rodakase
@@ -87,7 +88,11 @@ module Rodakase
       end
 
       def template_part(name, value)
-        part(template_path, name => value)
+        if value
+          part(template_path, name => value)
+        else
+          NullPart.new
+        end
       end
 
       def part(dir, value)
