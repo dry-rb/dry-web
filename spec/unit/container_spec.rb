@@ -41,11 +41,24 @@ RSpec.describe Rodakase::Container do
     end
   end
 
-  describe '.boot' do
-    it 'boots a given component' do
-      Test::Container.boot!('bar')
+  describe '.boot!' do
+    it 'boots a given component and finalizes it' do
+      Test::Container.boot!(:bar)
 
       expect(Test.const_defined?(:Bar)).to be(true)
+      expect(Test::Container['test.bar']).to eql('I was finalized')
+    end
+
+    it 'expects a symbol identifier matching file name' do
+      expect {
+        Test::Container.boot!('bar')
+      }.to raise_error(ArgumentError, 'component identifier must be a symbol')
+    end
+
+    it 'expects identifier to point to an existing boot file' do
+      expect {
+        Test::Container.boot!(:foo)
+      }.to raise_error(ArgumentError, 'component identifier +foo+ is invalid or boot file is missing')
     end
   end
 end

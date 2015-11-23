@@ -31,6 +31,10 @@ module Rodakase
       self
     end
 
+    def self.finalize(name, &block)
+      finalizers[name] = block
+    end
+
     def self.configured?
       @_configured
     end
@@ -38,7 +42,9 @@ module Rodakase
     def self.finalize!(&block)
       yield(self) if block
 
-      Dir[root.join('core/boot/**/*.rb')].each(&method(:require))
+      Dir[root.join('core/boot/**/*.rb')].each do |path|
+        boot!(File.basename(path, '.rb').to_sym)
+      end
 
       if config.auto_register
         Array(config.auto_register).each(&method(:auto_register!))
@@ -78,7 +84,32 @@ module Rodakase
     end
 
     def self.boot!(name)
+      unless name.is_a?(Symbol)
+        raise ArgumentError, 'component identifier must be a symbol'
+      end
+
+      unless root.join("core/boot/#{name}.rb").exist?
+        raise ArgumentError, "component identifier +#{name}+ is invalid or boot file is missing"
+      end
+
+      return self unless boot?(name)
+
+      boot(name)
+
+      finalizer = finalizers[name]
+      finalizer.() if finalizer
+
+      booted[name] = true
+
+      self
+    end
+
+    def self.boot(name)
       require "core/boot/#{name}.rb"
+    end
+
+    def self.boot?(name)
+      ! booted.key?(name)
     end
 
     def self.require(*paths)
@@ -87,7 +118,7 @@ module Rodakase
           path.include?('*') ? Dir[root.join(path)] : root.join(path)
         }
         .each { |path|
-          Kernel.require path
+          Kernel.require path.to_s
         }
     end
 
@@ -122,6 +153,14 @@ module Rodakase
 
     def self.load_paths
       @_load_paths ||= []
+    end
+
+    def self.booted
+      @_booted ||= {}
+    end
+
+    def self.finalizers
+      @_finalizers ||= {}
     end
   end
 end
