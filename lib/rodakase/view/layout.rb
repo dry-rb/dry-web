@@ -88,15 +88,14 @@ module Rodakase
       end
 
       def template_part(name, value)
-        if value
-          part(template_path, name => value)
-        else
-          NullPart.new
-        end
+        part(template_path, name => value)
       end
 
       def part(dir, value)
-        Part.new(renderer.chdir(dir), value)
+        value_present = value.values.first
+        part_class = value_present ? Part : NullPart
+
+        part_class.new(renderer.chdir(dir), value)
       end
     end
   end
