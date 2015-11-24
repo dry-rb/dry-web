@@ -13,10 +13,6 @@ module Rodakase
         @_value = data.values[0]
       end
 
-      def bind(&block)
-        yield(_value)
-      end
-
       def [](key)
         _value[key]
       end

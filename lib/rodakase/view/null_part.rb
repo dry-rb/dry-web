@@ -3,7 +3,6 @@ require 'dry-equalizer'
 module Rodakase
   module View
     class NullPart
-      def bind(&block);end
       def [](key);end
       def each(&block);end
 
