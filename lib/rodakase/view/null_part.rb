@@ -2,13 +2,9 @@ require 'dry-equalizer'
 
 module Rodakase
   module View
-    class NullPart
+    class NullPart < Part
       def [](key);end
       def each(&block);end
-
-      def render(path, &block)
-        ''
-      end
 
       def respond_to_missing?(meth, include_private = false)
         true
@@ -17,7 +13,13 @@ module Rodakase
       private
 
       def method_missing(meth, *args, &block)
-        nil
+        template_path = template?("#{meth}_missing")
+
+        if template_path
+          render(template_path)
+        else
+          nil
+        end
       end
     end
   end
