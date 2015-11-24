@@ -42,6 +42,12 @@ RSpec.describe Rodakase::View::Layout do
       expect(part[:name]).to eql('Jane')
     end
 
+    it 'builds null parts for nil values' do
+      part = layout.parts(user: nil)
+
+      expect(part[:id]).to be_nil
+    end
+
     it 'returns default scope when empty locals are passed' do
       expect(layout.parts({})).to be(layout.class::DEFAULT_SCOPE)
     end
