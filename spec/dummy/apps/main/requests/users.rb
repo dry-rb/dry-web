@@ -1,5 +1,5 @@
 Main::Requests.define do |r|
-  r.define('requests.users.create') do
-    step 'transactions.register_user'
+  r.define('main.requests.users.create') do
+    step 'main.transactions.register_user'
   end
 end

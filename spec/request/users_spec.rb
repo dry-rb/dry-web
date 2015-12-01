@@ -1,4 +1,4 @@
-require 'entities/user'
+require 'main/entities/user'
 
 RSpec.describe '/users', type: :request do
   describe 'GET /users' do
@@ -21,7 +21,7 @@ RSpec.describe '/users', type: :request do
 
       expect(last_response).to be_created
 
-      expect(container['persistence.repositories.users'].all).to eql([Entities::User.new('1', 'Jane')])
+      expect(container['main.persistence.repositories.users'].all).to eql([Main::Entities::User.new('1', 'Jane')])
     end
 
     it 'redirects when name is missing' do
