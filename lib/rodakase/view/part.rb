@@ -13,6 +13,10 @@ module Rodakase
         @_value = data.values[0]
       end
 
+      def to_s
+        _value.to_s
+      end
+
       def [](key)
         _value[key]
       end

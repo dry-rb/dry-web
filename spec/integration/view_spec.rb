@@ -30,8 +30,8 @@ RSpec.describe 'Rodakase View' do
       { name: 'Joe', email: 'joe@doe.org' }
     ]
 
-    expect(view.(scope: scope, locals: { users: users })).to eql(
-      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><div class="users"><table><tbody><tr><td>Jane</td><td>jane@doe.org</td></tr><tr><td>Joe</td><td>joe@doe.org</td></tr></tbody></table></div></body></html>'
+    expect(view.(scope: scope, locals: { subtitle: "Users List", users: users })).to eql(
+      '<!DOCTYPE html><html><head><title>Rodakase Rocks!</title></head><body><h2>Users List</h2><div class="users"><table><tbody><tr><td>Jane</td><td>jane@doe.org</td></tr><tr><td>Joe</td><td>joe@doe.org</td></tr></tbody></table></div></body></html>'
     )
   end
 
