@@ -27,7 +27,7 @@ RSpec.configure do |config|
   config.disable_monkey_patching!
 
   config.before(:suite) do
-    Main::Application.freeze
+    Dummy::Application.freeze
   end
 
   config.include Rack::Test::Methods, type: :request

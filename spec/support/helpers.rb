@@ -10,6 +10,6 @@ module Helpers
   end
 
   def app
-    Main::Application.app
+    Dummy::Application.app
   end
 end
