@@ -2,6 +2,7 @@ require 'dry-configurable'
 require 'dry-equalizer'
 
 require 'rodakase/view/part'
+require 'rodakase/view/null_part'
 require 'rodakase/view/renderer'
 
 module Rodakase
@@ -91,7 +92,10 @@ module Rodakase
       end
 
       def part(dir, value)
-        Part.new(renderer.chdir(dir), value)
+        value_present = value.values.first
+        part_class = value_present ? Part : NullPart
+
+        part_class.new(renderer.chdir(dir), value)
       end
     end
   end
