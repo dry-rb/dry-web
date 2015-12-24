@@ -6,7 +6,7 @@ module Helpers
   end
 
   def container
-    Dummy::Container
+    Main::Container
   end
 
   def app

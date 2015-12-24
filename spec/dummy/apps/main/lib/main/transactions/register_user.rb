@@ -5,7 +5,7 @@ require 'transaction'
 module Main
   module Transactions
     class RegisterUser < Transaction
-      include Main::Import(:db)
+      include Main::Import('persistence.db')
 
       def call(params)
         if params['name']

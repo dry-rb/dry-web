@@ -1,6 +1,12 @@
 require_relative 'main/container'
 
-Main::Container.finalize!
+Main::Container.finalize! do |container|
+  require 'logger'
+  container.register(:logger, Logger.new(container.root.join('log/app.log')))
+
+  require 'rodakase/transaction'
+  container.register(:transaction, Rodakase::Transaction::Composer.new(container))
+end
 
 require 'main/application'
 require 'main/view'

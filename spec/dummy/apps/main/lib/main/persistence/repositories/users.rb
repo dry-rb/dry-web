@@ -5,7 +5,7 @@ module Main
   module Persistence
     module Repositories
       class Users
-        include Main::Import(:db)
+        include Main::Import('persistence.db')
 
         def all
           db[:users]

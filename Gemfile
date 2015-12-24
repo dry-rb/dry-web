@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in rodakase.gemspec
 gemspec
 
+gem 'dry-component', github: 'dryrb/dry-component', branch: 'master'
+
 group :test do
   gem 'byebug', platform: :mri
   gem 'rack-test'
