@@ -7,6 +7,10 @@ module Main
       config.auto_register = 'lib'
     end
 
+    require root.join('../../shared/persistence').to_s
+
+    import Persistence::Container
+
     load_paths!('lib')
   end
 end
