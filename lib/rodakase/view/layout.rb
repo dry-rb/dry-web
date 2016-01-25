@@ -22,27 +22,19 @@ module Rodakase
       setting :renderer
       setting :name
       setting :template
+      setting :default_format, 'html'
       setting :scope
 
-      def self.configure(&block)
-        super do |config|
-          yield(config)
-
-          unless config.renderer
-            config.renderer = Renderer.new(config.root, engine: config.engine)
-          end
-        end
-      end
-
       attr_reader :config, :renderer, :scope,
-        :layout_dir, :layout_path, :template_path
+        :layout_dir, :layout_path, :template_path, :format
 
-      def initialize
+      def initialize(format = nil)
         @config = self.class.config
-        @renderer = @config.renderer
         @layout_dir = DEFAULT_DIR
         @layout_path = "#{layout_dir}/#{config.name}"
         @template_path = config.template
+        @format = format || config.default_format
+        @renderer = Renderer.new(config.root, format: @format, engine: config.engine)
         @scope = config.scope
       end
 
@@ -50,6 +42,11 @@ module Rodakase
         renderer.(layout_path, layout_scope(options)) do
           renderer.(template_path, template_scope(options))
         end
+      end
+
+      def format(new_format)
+        return self if format == new_format
+        self.class.new(new_format)
       end
 
       def layout_scope(options)

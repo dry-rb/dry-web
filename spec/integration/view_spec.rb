@@ -5,17 +5,13 @@ RSpec.describe 'Rodakase View' do
     klass = Class.new(Rodakase::View::Layout)
 
     klass.configure do |config|
-      config.renderer = renderer
+      config.root = SPEC_ROOT.join('fixtures/templates')
       config.engine = :slim
       config.name = 'app'
       config.template = 'users'
     end
 
     klass
-  end
-
-  let(:renderer) do
-    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), engine: :slim)
   end
 
   let(:scope) do
@@ -39,7 +35,7 @@ RSpec.describe 'Rodakase View' do
     let(:parent_view) do
       klass = Class.new(Rodakase::View::Layout)
 
-      klass.setting :renderer, renderer
+      klass.setting :root, SPEC_ROOT.join('fixtures/templates')
       klass.setting :engine, :slim
       klass.setting :name, 'app'
 
