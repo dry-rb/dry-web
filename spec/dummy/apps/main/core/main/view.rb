@@ -1,3 +1,5 @@
+require 'slim'
+
 require 'rodakase/view'
 require_relative 'container'
 
@@ -13,7 +15,7 @@ module Main
   class View < Rodakase::View::Layout
     setting :root, Container.root.join('web/templates')
     setting :scope, Page.new
-    setting :engine, :slim
+    setting :formats, {html: :slim}
     setting :name, 'app'.freeze
   end
 end

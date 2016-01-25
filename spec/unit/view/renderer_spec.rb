@@ -2,7 +2,7 @@ require 'rodakase/view/renderer'
 
 RSpec.describe Rodakase::View::Renderer do
   subject(:renderer) do
-    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), engine: :slim)
+    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), format: 'html', engine: :slim)
   end
 
   let(:scope) { double(:scope) }

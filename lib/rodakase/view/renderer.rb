@@ -8,7 +8,7 @@ module Rodakase
 
       TemplateNotFoundError = Class.new(StandardError)
 
-      attr_reader :dir, :root, :engine, :tilts
+      attr_reader :dir, :root, :format, :engine, :tilts
 
       def self.tilts
         @__engines__ ||= {}
@@ -17,6 +17,7 @@ module Rodakase
       def initialize(dir, options = {})
         @dir = dir
         @root = options.fetch(:root, dir)
+        @format = options[:format]
         @engine = options[:engine]
         @tilts = self.class.tilts
       end
@@ -56,11 +57,11 @@ module Rodakase
       end
 
       def path(name)
-        dir.join("#{name}.#{engine}")
+        dir.join("#{name}.#{format}.#{engine}")
       end
 
       def chdir(dirname)
-        self.class.new(dir.join(dirname), engine: engine, root: root)
+        self.class.new(dir.join(dirname), engine: engine, format: format, root: root)
       end
     end
   end
