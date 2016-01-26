@@ -53,7 +53,6 @@ module Rodakase
       end
 
       def template_scope(options, renderer)
-        byebug
         parts(locals(options), renderer)
       end
 
