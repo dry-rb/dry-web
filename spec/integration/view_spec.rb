@@ -6,9 +6,9 @@ RSpec.describe 'Rodakase View' do
 
     klass.configure do |config|
       config.root = SPEC_ROOT.join('fixtures/templates')
-      config.engine = :slim
       config.name = 'app'
       config.template = 'users'
+      config.formats = {html: :slim, txt: :erb}
     end
 
     klass
@@ -39,7 +39,7 @@ RSpec.describe 'Rodakase View' do
       { name: 'Joe', email: 'joe@doe.org' }
     ]
 
-    expect(view.(scope: scope, locals: { subtitle: 'Users List', users: users }, format: 'txt', engine: 'erb').strip).to eql(
+    expect(view.(scope: scope, locals: { subtitle: 'Users List', users: users }, format: 'txt').strip).to eql(
       "# Rodakase Rocks!\n\n## Users List\n\n* Jane (jane@doe.org)\n* Joe (joe@doe.org)"
     )
   end
@@ -49,8 +49,8 @@ RSpec.describe 'Rodakase View' do
       klass = Class.new(Rodakase::View::Layout)
 
       klass.setting :root, SPEC_ROOT.join('fixtures/templates')
-      klass.setting :engine, :slim
       klass.setting :name, 'app'
+      klass.setting :formats, {html: :slim}
 
       klass
     end

@@ -8,7 +8,7 @@ RSpec.describe Rodakase::View::Layout do
       config.root = SPEC_ROOT.join('fixtures/templates')
       config.name = 'app'
       config.template = 'user'
-      config.engine = :slim
+      config.formats = {html: :slim}
     end
 
     klass
