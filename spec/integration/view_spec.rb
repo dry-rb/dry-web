@@ -39,8 +39,8 @@ RSpec.describe 'Rodakase View' do
       { name: 'Joe', email: 'joe@doe.org' }
     ]
 
-    expect(view.(scope: scope, locals: { subtitle: 'Users List', users: users }, format: 'txt', engine: 'erb')).to eql(
-      "# Rodakase Rocks!\n\n## Users List\n\n* Jane (jane@doe.org)\n* Joe (joe@doe.org)\n\n"
+    expect(view.(scope: scope, locals: { subtitle: 'Users List', users: users }, format: 'txt', engine: 'erb').strip).to eql(
+      "# Rodakase Rocks!\n\n## Users List\n\n* Jane (jane@doe.org)\n* Joe (joe@doe.org)"
     )
   end
 
