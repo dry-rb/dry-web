@@ -20,8 +20,8 @@ module Rodakase
       end
 
       def render
-        renderer.(view.layout_path, layout_scope(options)) do
-          renderer.(view.template_path, template_scope(options))
+        renderer.(view.layout_path, layout_scope) do
+          renderer.(view.template_path, template_scope)
         end
       end
 
@@ -44,11 +44,11 @@ module Rodakase
 
       private
 
-      def layout_scope(options)
+      def layout_scope
         Scope.new(layout_part(:page, options.fetch(:scope, view.scope)))
       end
 
-      def template_scope(options)
+      def template_scope
         parts(view.locals(options))
       end
 
