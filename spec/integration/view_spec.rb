@@ -5,17 +5,13 @@ RSpec.describe 'Rodakase View' do
     klass = Class.new(Rodakase::View::Layout)
 
     klass.configure do |config|
-      config.renderer = renderer
-      config.engine = :slim
+      config.root = SPEC_ROOT.join('fixtures/templates')
       config.name = 'app'
       config.template = 'users'
+      config.formats = {html: :slim, txt: :erb}
     end
 
     klass
-  end
-
-  let(:renderer) do
-    Rodakase::View::Renderer.new(SPEC_ROOT.join('fixtures/templates'), engine: :slim)
   end
 
   let(:scope) do
@@ -35,13 +31,26 @@ RSpec.describe 'Rodakase View' do
     )
   end
 
+  it 'renders a view with an alternative format and engine' do
+    view = view_class.new
+
+    users = [
+      { name: 'Jane', email: 'jane@doe.org' },
+      { name: 'Joe', email: 'joe@doe.org' }
+    ]
+
+    expect(view.(scope: scope, locals: { subtitle: 'Users List', users: users }, format: 'txt').strip).to eql(
+      "# Rodakase Rocks!\n\n## Users List\n\n* Jane (jane@doe.org)\n* Joe (joe@doe.org)"
+    )
+  end
+
   describe 'inheritance' do
     let(:parent_view) do
       klass = Class.new(Rodakase::View::Layout)
 
-      klass.setting :renderer, renderer
-      klass.setting :engine, :slim
+      klass.setting :root, SPEC_ROOT.join('fixtures/templates')
       klass.setting :name, 'app'
+      klass.setting :formats, {html: :slim}
 
       klass
     end
