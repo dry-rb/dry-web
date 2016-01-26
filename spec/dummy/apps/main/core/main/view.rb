@@ -1,3 +1,5 @@
+require 'slim'
+
 require 'rodakase/view'
 require_relative 'container'
 
