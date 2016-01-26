@@ -20,15 +20,13 @@ module Rodakase
       setting :format, 'html'
       setting :scope
 
-      attr_reader :config, :scope,
-        :layout_dir, :layout_path, :template_path
+      attr_reader :config, :layout_dir, :layout_path, :template_path
 
       def initialize
         @config = self.class.config
         @layout_dir = DEFAULT_DIR
         @layout_path = "#{layout_dir}/#{config.name}"
         @template_path = config.template
-        @scope = config.scope
       end
 
       def call(options = {})
@@ -50,6 +48,7 @@ module Rodakase
       def render_context(options)
         RenderContext.new(
           self,
+          options.fetch(:scope, config.scope),
           options.fetch(:format, config.format),
           options.fetch(:engine, config.engine),
           options

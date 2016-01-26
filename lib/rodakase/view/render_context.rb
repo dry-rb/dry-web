@@ -7,14 +7,15 @@ require 'rodakase/view/null_part'
 module Rodakase
   module View
     class RenderContext
-      include Dry::Equalizer(:view, :renderer, :options)
+      include Dry::Equalizer(:view, :scope, :renderer, :options)
 
       Scope = Struct.new(:page)
 
-      attr_reader :view, :renderer, :options
+      attr_reader :view, :scope, :renderer, :options
 
-      def initialize(view, format, engine, options = {})
+      def initialize(view, scope, format, engine, options = {})
         @view = view
+        @scope = scope
         @renderer = Renderer.new(view.config.root, format: format, engine: engine)
         @options = options
       end
@@ -45,7 +46,7 @@ module Rodakase
       private
 
       def layout_scope
-        Scope.new(layout_part(:page, options.fetch(:scope, view.scope)))
+        Scope.new(layout_part(:page, scope))
       end
 
       def template_scope
