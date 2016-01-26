@@ -43,11 +43,6 @@ module Rodakase
         end
       end
 
-      def format(new_format)
-        return self if format == new_format
-        self.class.new(new_format)
-      end
-
       def layout_scope(options, renderer)
         Scope.new(layout_part(:page, options.fetch(:scope, scope), renderer))
       end
