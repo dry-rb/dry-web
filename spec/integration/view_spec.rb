@@ -31,6 +31,19 @@ RSpec.describe 'Rodakase View' do
     )
   end
 
+  it 'renders a view with an alternative format and engine' do
+    view = view_class.new
+
+    users = [
+      { name: 'Jane', email: 'jane@doe.org' },
+      { name: 'Joe', email: 'joe@doe.org' }
+    ]
+
+    expect(view.(scope: scope, locals: { subtitle: 'Users List', users: users }, format: 'txt', engine: 'erb')).to eql(
+      "# Rodakase Rocks!\n\n## Users List\n\n* Jane (jane@doe.org)\n* Joe (joe@doe.org)\n\n"
+    )
+  end
+
   describe 'inheritance' do
     let(:parent_view) do
       klass = Class.new(Rodakase::View::Layout)
