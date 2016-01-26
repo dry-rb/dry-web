@@ -19,28 +19,27 @@ module Rodakase
 
       setting :engine
       setting :root
-      setting :renderer
       setting :name
       setting :template
       setting :default_format, 'html'
       setting :scope
 
-      attr_reader :config, :renderer, :scope,
-        :layout_dir, :layout_path, :template_path, :format
+      attr_reader :config, :scope,
+        :layout_dir, :layout_path, :template_path
 
-      def initialize(format = nil)
+      def initialize
         @config = self.class.config
         @layout_dir = DEFAULT_DIR
         @layout_path = "#{layout_dir}/#{config.name}"
         @template_path = config.template
-        @format = format || config.default_format
-        @renderer = Renderer.new(config.root, format: @format, engine: config.engine)
         @scope = config.scope
       end
 
       def call(options = {})
-        renderer.(layout_path, layout_scope(options)) do
-          renderer.(template_path, template_scope(options))
+        renderer = Renderer.new(config.root, format: options.fetch(:format, config.default_format), engine: config.engine)
+
+        renderer.(layout_path, layout_scope(options, renderer)) do
+          renderer.(template_path, template_scope(options, renderer))
         end
       end
 
@@ -49,19 +48,20 @@ module Rodakase
         self.class.new(new_format)
       end
 
-      def layout_scope(options)
-        Scope.new(layout_part(:page, options.fetch(:scope, scope)))
+      def layout_scope(options, renderer)
+        Scope.new(layout_part(:page, options.fetch(:scope, scope), renderer))
       end
 
-      def template_scope(options)
-        parts(locals(options))
+      def template_scope(options, renderer)
+        byebug
+        parts(locals(options), renderer)
       end
 
       def locals(options)
         options.fetch(:locals, {})
       end
 
-      def parts(locals)
+      def parts(locals, renderer)
         return DEFAULT_SCOPE unless locals.any?
 
         part_hash = locals.each_with_object({}) do |(key, value), result|
@@ -69,26 +69,26 @@ module Rodakase
             case value
             when Array
               el_key = Inflecto.singularize(key).to_sym
-              template_part(key, value.map { |element| template_part(el_key, element) })
+              template_part(key, value.map { |element| template_part(el_key, element, renderer) }, renderer)
             else
-              template_part(key, value)
+              template_part(key, value, renderer)
             end
 
           result[key] = part
         end
 
-        part(template_path, part_hash)
+        part(template_path, part_hash, renderer)
       end
 
-      def layout_part(name, value)
-        part(layout_dir, name => value)
+      def layout_part(name, value, renderer)
+        part(layout_dir, {name => value}, renderer)
       end
 
-      def template_part(name, value)
-        part(template_path, name => value)
+      def template_part(name, value, renderer)
+        part(template_path, {name => value}, renderer)
       end
 
-      def part(dir, value)
+      def part(dir, value, renderer)
         value_present = value.values.first
         part_class = value_present ? Part : NullPart
 
