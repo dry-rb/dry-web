@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rodakase'
 gem 'pry'
+gem 'pry-byebug', platform: 'mri'
+gem 'rake'
 
 group :test do
   gem 'rack-test'
