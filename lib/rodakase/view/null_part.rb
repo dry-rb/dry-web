@@ -3,8 +3,11 @@ require 'dry-equalizer'
 module Rodakase
   module View
     class NullPart < Part
-      def [](key);end
-      def each(&block);end
+      def [](key)
+      end
+
+      def each(&block)
+      end
 
       def respond_to_missing?(meth, include_private = false)
         true

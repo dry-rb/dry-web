@@ -46,7 +46,7 @@ module Rodakase
       def call(options = {})
         renderer = self.class.renderer(options[:format])
 
-        renderer.(layout_path, layout_scope(options)) do
+        renderer.(layout_path, layout_scope(options, renderer)) do
           renderer.(template_path, template_scope(options))
         end
       end
@@ -56,6 +56,8 @@ module Rodakase
       end
 
       def parts(locals, options = {})
+        renderer = self.class.renderer(options[:format])
+
         return DEFAULT_SCOPE unless locals.any?
 
         part_hash = locals.each_with_object({}) do |(key, value), result|
@@ -63,41 +65,41 @@ module Rodakase
             case value
             when Array
               el_key = Inflecto.singularize(key).to_sym
-              template_part(key, value.map { |element| template_part(el_key, element, options) }, options)
+
+              template_part(
+                key, renderer,
+                value.map { |element| template_part(el_key, renderer, element) }
+              )
             else
-              template_part(key, value, options)
+              template_part(key, renderer, value)
             end
 
           result[key] = part
         end
 
-        part(template_path, part_hash, options)
+        part(template_path, renderer, part_hash)
       end
 
       private
 
-      def layout_scope(options)
-        Scope.new(layout_part(:page, options.fetch(:scope, scope), options))
+      def layout_scope(options, renderer)
+        Scope.new(layout_part(:page, renderer, options.fetch(:scope, scope)))
       end
 
       def template_scope(options)
         parts(locals(options), options)
       end
 
-      def layout_part(name, value, options)
-        part(layout_dir, {name => value}, options)
+      def layout_part(name, renderer, value)
+        part(layout_dir, renderer, { name => value })
       end
 
-      def template_part(name, value, options)
-        part(template_path, {name => value}, options)
+      def template_part(name, renderer, value)
+        part(template_path, renderer, { name => value })
       end
 
-      def part(dir, value, options)
-        renderer = self.class.renderer(options[:format])
-
-        value_present = value.values.first
-        part_class = value_present ? Part : NullPart
-
+      def part(dir, renderer, value = {})
+        part_class = value.values[0] ? Part : NullPart
         part_class.new(renderer.chdir(dir), value)
       end
     end
