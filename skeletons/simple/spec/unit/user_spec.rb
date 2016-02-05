@@ -1,7 +1,7 @@
-require 'main/entities/user'
+require 'entities/user'
 
-RSpec.describe Main::Entities::User do
-  subject(:user) { Main::Entities::User.new(1, 'Jane') }
+RSpec.describe Entities::User do
+  subject(:user) { Entities::User.new(1, 'Jane') }
 
   describe '#id' do
     it 'works' do
