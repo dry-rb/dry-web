@@ -20,23 +20,35 @@ module Rodakase
       setting :root
       setting :name
       setting :template
-      setting :formats
+      setting :formats, { html: :erb }
       setting :scope
 
-      attr_reader :config, :scope, :layout_dir, :layout_path, :template_path
+      attr_reader :config, :scope, :layout_dir, :layout_path, :template_path,
+        :default_format
 
-      def self.renderer(format = nil)
-        format = config.formats.keys.first unless format
-        raise ArgumentError, "format +#{format}+ is not configured" unless config.formats.keys.include?(format.to_sym)
-
-        @renderers ||= Hash.new do |h, key|
-          h[key.to_sym] = Renderer.new(config.root, format: key, engine: config.formats[key.to_sym])
+      def self.renderer(format = default_format)
+        unless config.formats.key?(format.to_sym)
+          raise ArgumentError, "format +#{format}+ is not configured"
         end
-        @renderers[format]
+
+        renderers[format]
+      end
+
+      def self.renderers
+        @renderers ||= Hash.new do |h, key|
+          h[key.to_sym] = Renderer.new(
+            config.root, format: key, engine: config.formats[key.to_sym]
+          )
+        end
+      end
+
+      def self.default_format
+        config.formats.keys.first
       end
 
       def initialize
         @config = self.class.config
+        @default_format = self.class.default_format
         @layout_dir = DEFAULT_DIR
         @layout_path = "#{layout_dir}/#{config.name}"
         @template_path = config.template
@@ -44,10 +56,10 @@ module Rodakase
       end
 
       def call(options = {})
-        renderer = self.class.renderer(options[:format])
+        renderer = self.class.renderer(options.fetch(:format, default_format))
 
         renderer.(layout_path, layout_scope(options, renderer)) do
-          renderer.(template_path, template_scope(options))
+          renderer.(template_path, template_scope(options, renderer))
         end
       end
 
@@ -55,9 +67,7 @@ module Rodakase
         options.fetch(:locals, {})
       end
 
-      def parts(locals, options = {})
-        renderer = self.class.renderer(options[:format])
-
+      def parts(locals, renderer)
         return empty_part(template_path, renderer) unless locals.any?
 
         part_hash = locals.each_with_object({}) do |(key, value), result|
@@ -86,8 +96,8 @@ module Rodakase
         Scope.new(layout_part(:page, renderer, options.fetch(:scope, scope)))
       end
 
-      def template_scope(options)
-        parts(locals(options), options)
+      def template_scope(options, renderer)
+        parts(locals(options), renderer)
       end
 
       def layout_part(name, renderer, value)
