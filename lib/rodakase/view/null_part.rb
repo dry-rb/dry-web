@@ -1,15 +1,16 @@
 require 'dry-equalizer'
+require 'rodakase/view/value_part'
 
 module Rodakase
   module View
-    class NullPart < Part
+    class NullPart < ValuePart
       def [](key)
       end
 
       def each(&block)
       end
 
-      def respond_to_missing?(meth, include_private = false)
+      def respond_to_missing?(*)
         true
       end
 

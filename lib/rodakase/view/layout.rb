@@ -2,6 +2,7 @@ require 'dry-configurable'
 require 'dry-equalizer'
 
 require 'rodakase/view/part'
+require 'rodakase/view/value_part'
 require 'rodakase/view/null_part'
 require 'rodakase/view/renderer'
 
@@ -12,7 +13,6 @@ module Rodakase
 
       Scope = Struct.new(:page)
 
-      DEFAULT_SCOPE = Object.new.freeze
       DEFAULT_DIR = 'layouts'.freeze
 
       extend Dry::Configurable
@@ -58,7 +58,7 @@ module Rodakase
       def parts(locals, options = {})
         renderer = self.class.renderer(options[:format])
 
-        return DEFAULT_SCOPE unless locals.any?
+        return empty_part(template_path, renderer) unless locals.any?
 
         part_hash = locals.each_with_object({}) do |(key, value), result|
           part =
@@ -99,8 +99,12 @@ module Rodakase
       end
 
       def part(dir, renderer, value = {})
-        part_class = value.values[0] ? Part : NullPart
+        part_class = value.values[0] ? ValuePart : NullPart
         part_class.new(renderer.chdir(dir), value)
+      end
+
+      def empty_part(dir, renderer)
+        Part.new(renderer.chdir(dir))
       end
     end
   end

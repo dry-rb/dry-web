@@ -3,26 +3,12 @@ require 'dry-equalizer'
 module Rodakase
   module View
     class Part
-      include Dry::Equalizer(:renderer, :_data, :_value)
+      include Dry::Equalizer(:renderer)
 
-      attr_reader :renderer, :_data, :_value
+      attr_reader :renderer
 
-      def initialize(renderer, data)
+      def initialize(renderer)
         @renderer = renderer
-        @_data = data
-        @_value = data.values[0]
-      end
-
-      def to_s
-        _value.to_s
-      end
-
-      def [](key)
-        _value[key]
-      end
-
-      def each(&block)
-        _value.each(&block)
       end
 
       def render(path, &block)
@@ -34,7 +20,7 @@ module Rodakase
       end
 
       def respond_to_missing?(meth, include_private = false)
-        super || _data.key?(meth) || template?(meth)
+        super || template?(meth)
       end
 
       private
@@ -44,10 +30,6 @@ module Rodakase
 
         if template_path
           render(template_path, &block)
-        elsif _data.key?(meth)
-          _data[meth]
-        elsif _value.respond_to?(meth)
-          _value.public_send(meth, *args, &block)
         else
           super
         end

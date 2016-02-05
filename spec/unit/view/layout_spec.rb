@@ -44,8 +44,8 @@ RSpec.describe Rodakase::View::Layout do
       expect(part[:id]).to be_nil
     end
 
-    it 'returns default scope when empty locals are passed' do
-      expect(layout.parts({})).to be(layout.class::DEFAULT_SCOPE)
+    it 'returns empty part when no locals are passed' do
+      expect(layout.parts({})).to be_instance_of(Rodakase::View::Part)
     end
   end
 end

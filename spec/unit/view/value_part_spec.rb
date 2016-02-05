@@ -1,8 +1,8 @@
 require 'rodakase/view/part'
 
-RSpec.describe Rodakase::View::Part do
+RSpec.describe Rodakase::View::ValuePart do
   subject(:part) do
-    Rodakase::View::Part.new(renderer, data)
+    Rodakase::View::ValuePart.new(renderer, data)
   end
 
   let(:name) { :user }
