@@ -58,8 +58,10 @@ module Rodakase
       def call(options = {})
         renderer = self.class.renderer(options.fetch(:format, default_format))
 
+        template_content = renderer.(template_path, template_scope(options, renderer))
+
         renderer.(layout_path, layout_scope(options, renderer)) do
-          renderer.(template_path, template_scope(options, renderer))
+          template_content
         end
       end
 
