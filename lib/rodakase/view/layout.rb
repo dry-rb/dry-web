@@ -11,8 +11,6 @@ module Rodakase
     class Layout
       include Dry::Equalizer(:config)
 
-      Scope = Struct.new(:page)
-
       DEFAULT_DIR = 'layouts'.freeze
 
       extend Dry::Configurable
@@ -93,7 +91,11 @@ module Rodakase
       private
 
       def layout_scope(options, renderer)
-        Scope.new(layout_part(:page, renderer, options.fetch(:scope, scope)))
+        part_hash = {
+          page: layout_part(:page, renderer, options.fetch(:scope, scope))
+        }
+
+        part(layout_dir, renderer, part_hash)
       end
 
       def template_scope(options, renderer)
