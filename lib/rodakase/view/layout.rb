@@ -97,7 +97,9 @@ module Rodakase
       end
 
       def template_scope(options, renderer)
-        parts(locals(options), renderer)
+        locals = locals(options).merge(page: options.fetch(:scope, scope))
+
+        parts(locals, renderer)
       end
 
       def layout_part(name, renderer, value)
