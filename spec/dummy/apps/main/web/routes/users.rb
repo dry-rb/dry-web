@@ -10,9 +10,7 @@ class Main::Application < Rodakase::Application
           end
 
           m.failure do |err|
-            err.on(:validation) do |v|
-              r.redirect '/users'
-            end
+            r.redirect '/users'
           end
         end
       end

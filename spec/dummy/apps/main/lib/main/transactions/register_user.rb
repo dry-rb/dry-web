@@ -1,17 +1,17 @@
 require 'main/import'
 require 'main/entities/user'
-require 'transaction'
+require 'kleisli'
 
 module Main
   module Transactions
-    class RegisterUser < Transaction
+    class RegisterUser
       include Main::Import('persistence.db')
 
       def call(params)
         if params['name']
-          success(db[:users] << Main::Entities::User.new(*params.values_at('id', 'name')))
+          Right(db[:users] << Main::Entities::User.new(*params.values_at('id', 'name')))
         else
-          failure(:validation, 'name is missing')
+          Left(validation: 'name is missing')
         end
       end
     end
