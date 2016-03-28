@@ -1,23 +1,23 @@
-[gem]: https://rubygems.org/gems/rodakase
-[travis]: https://travis-ci.org/solnic/rodakase
-[gemnasium]: https://gemnasium.com/solnic/rodakase
-[codeclimate]: https://codeclimate.com/github/solnic/rodakase
-[inchpages]: http://inch-ci.org/github/solnic/rodakase/
+[gem]: https://rubygems.org/gems/dry-web
+[travis]: https://travis-ci.org/dry-rb/dry-web
+[gemnasium]: https://gemnasium.com/dry-rb/dry-web
+[codeclimate]: https://codeclimate.com/github/dry-rb/dry-web
+[inchpages]: http://inch-ci.org/github/dry-rb/dry-web/
 
-# Rodakase [![Join the chat at https://gitter.im/solnic/rodakase](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/solnic/rodakase?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# dry-web [![Join the chat at https://gitter.im/dry-rb/dry-web](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dry-rb/dry-web?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Gem Version](https://badge.fury.io/rb/rodakase.svg)][gem]
-[![Build Status](https://travis-ci.org/solnic/rodakase.svg?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/solnic/rodakase.svg)][gemnasium]
-[![Code Climate](https://codeclimate.com/github/solnic/rodakase/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/solnic/rodakase/badges/coverage.svg)][codeclimate]
-[![Inline docs](http://inch-ci.org/github/solnic/rodakase.svg?branch=master&style=flat)][inchpages]
+[![Gem Version](https://badge.fury.io/rb/dry-web.svg)][gem]
+[![Build Status](https://travis-ci.org/dry-rb/dry-web.svg?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/dry-rb/dry-web.svg)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/dry-rb/dry-web/badges/gpa.svg)][codeclimate]
+[![Test Coverage](https://codeclimate.com/github/dry-rb/dry-web/badges/coverage.svg)][codeclimate]
+[![Inline docs](http://inch-ci.org/github/dry-rb/dry-web.svg?branch=master&style=flat)][inchpages]
 
-Rodakase is a lightweight web stack on top of Roda which gives you a foundation
+dry-web is a lightweight web stack on top of Roda which gives you a foundation
 for building robust web applications while decoupling your application code from
 the framework.
 
-There are a couple of core concepts in Rodakase which makes it stand out from the crowd:
+There are a couple of core concepts in dry-web which makes it stand out from the crowd:
 
 * Container-based architecture where your application dependencies are accessible
   through a simple IoC container
@@ -33,7 +33,7 @@ There are a couple of core concepts in Rodakase which makes it stand out from th
   application should be easily accessible using clear APIs
 * Uses ROM by default for persistence
 
-Rodakase says **NO** to the following concepts:
+dry-web says **NO** to the following concepts:
 
 * monkey-patching
 * mutable global state
@@ -45,7 +45,7 @@ Rodakase says **NO** to the following concepts:
 
 ## Sample App
 
-A sample rodakase-based web app is [right here](https://github.com/solnic/rodakase-blog).
+A sample dry-web-based web app is [right here](https://github.com/dry-rb/dry-web-blog).
 
 ## Status
 
@@ -53,7 +53,7 @@ This project hasn't been released yet. It's under heavy development.
 
 ## Tools
 
-Rodakase is based on a bunch of awesome libraries:
+dry-web is based on a bunch of awesome libraries:
 
 * roda
 * roda-flow
@@ -64,9 +64,9 @@ Rodakase is based on a bunch of awesome libraries:
 
 ## The Book
 
-Rodakase will be described in ["Web Development with ROM and Roda"](https://leanpub.com/web-development-with-rom-and-roda) book
+dry-web will be described in ["Web Development with ROM and Roda"](https://leanpub.com/web-development-with-rom-and-roda) book
 that I'm working on. If you're interested in the project and/or the book, feel free
-to join [Rodakase gitter channel](https://gitter.im/solnic/rodakase).
+to join [dry-web gitter channel](https://gitter.im/dry-rb/dry-web).
 
 ## LICENSE
 
@@ -77,7 +77,7 @@ See `LICENSE.txt` file.
 Add this line to your application's Gemfile:
 
 ```
-gem 'rodakase'
+gem 'dry-web'
 ```
 
 And then execute:
@@ -89,7 +89,7 @@ $ bundle
 Or install it yourself as:
 
 ```
-$ gem install rodakase
+$ gem install dry-web
 ```
 
 ## Development
@@ -103,7 +103,7 @@ Also you need to run the migrations, do following:
   $ rake db:migrate
 ```
 
-After that you can run the specs from rodakase root:
+After that you can run the specs from dry-web root:
 
 ```
   $ bundle exec rspec
@@ -111,4 +111,4 @@ After that you can run the specs from rodakase root:
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/solnic/rodakase.
+Bug reports and pull requests are welcome on GitHub at https://github.com/dry-rb/dry-web.
