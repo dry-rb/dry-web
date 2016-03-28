@@ -4,8 +4,8 @@ Main::Container.finalize! do |container|
   require 'logger'
   container.register(:logger, Logger.new(container.root.join('log/app.log')))
 
-  require 'rodakase/transaction'
-  container.register(:transaction, Rodakase::Transaction::Composer.new(container))
+  require 'dry/web/transaction'
+  container.register(:transaction, Dry::Web::Transaction::Composer.new(container))
 end
 
 require 'main/application'

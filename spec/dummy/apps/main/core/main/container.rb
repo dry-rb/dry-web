@@ -1,7 +1,7 @@
-require 'rodakase/container'
+require 'dry/web/container'
 
 module Main
-  class Container < Rodakase::Container
+  class Container < Dry::Web::Container
     configure do |config|
       config.root = Pathname(__FILE__).join('../..').realpath.dirname.freeze
       config.auto_register = 'lib'

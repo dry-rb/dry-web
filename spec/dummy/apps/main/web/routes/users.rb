@@ -1,4 +1,4 @@
-class Main::Application < Rodakase::Application
+class Main::Application < Dry::Web::Application
   route('users') do |r|
     r.get(to: 'main.views.users.index')
 

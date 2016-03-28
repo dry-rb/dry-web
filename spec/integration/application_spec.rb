@@ -1,6 +1,6 @@
 require 'main/import'
 
-RSpec.describe 'Rodakase Application' do
+RSpec.describe 'Dry Web Application' do
   it 'sets env' do
     expect(Main::Application.config.container.config.env).to be(:test)
   end

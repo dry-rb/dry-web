@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'rodakase/cli'
+require 'dry/web/cli'
 # require_relative '../core/boot'
 
-Rodakase::Cli.start
+Dry::Web::Cli.start

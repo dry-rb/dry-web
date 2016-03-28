@@ -1,8 +1,8 @@
-require 'rodakase/application'
+require 'dry/web/application'
 require_relative 'container'
 
 module Main
-  class Application < Rodakase::Application
+  class Application < Dry::Web::Application
     configure do |config|
       config.routes = 'web/routes'.freeze
       config.container = Main::Container

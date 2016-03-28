@@ -1,7 +1,7 @@
-require 'rodakase/container'
+require 'dry/web/container'
 
 module Dummy
-  class Container < Rodakase::Container
+  class Container < Dry::Web::Container
     # we need to override default here because we run tests from within the
     # project root and our app is in spec/dummy
     configure do |config|
