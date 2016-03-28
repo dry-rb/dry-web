@@ -1,6 +1,6 @@
 require 'slim'
+require 'dry-view'
 
-require 'rodakase/view'
 require_relative 'container'
 
 module Main
@@ -12,7 +12,7 @@ module Main
 end
 
 module Main
-  class View < Rodakase::View::Layout
+  class View < Dry::View::Layout
     setting :root, Container.root.join('web/templates')
     setting :scope, Page.new
     setting :formats, {html: :slim}
