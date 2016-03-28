@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'dry-component', github: 'dryrb/dry-component', branch: 'master'
-gem 'transflow', github: 'timriley/transflow', branch: 'fix-step-bug'
 
 group :test do
   gem 'byebug', platform: :mri
