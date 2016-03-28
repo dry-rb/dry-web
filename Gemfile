@@ -19,8 +19,3 @@ end
 group :tools do
   gem 'pry'
 end
-
-group :benchmarks do
-  gem 'benchmark-ips'
-  gem 'actionview'
-end
