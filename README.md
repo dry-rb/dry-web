@@ -15,10 +15,10 @@
 
 dry-web is composed from the following libraries:
 
-* roda
-* dry-component
-* dry-view
-* dry-transaction
+* [roda](http://roda.jeremyevans.net)
+* [dry-component](https://github.com/dry-rb/dry-component)
+* [dry-view](https://github.com/dry-rb/dry-view)
+* [dry-transaction](https://github.com/dry-rb/dry-transaction)
 
 ## LICENSE
 
