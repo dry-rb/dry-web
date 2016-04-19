@@ -1,3 +1,3 @@
-class Simple::Application < Rodakase::Application
+class Simple::Application < Dry::Web::Application
   plugin :heartbeat
 end

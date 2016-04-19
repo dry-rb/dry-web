@@ -1,7 +1,7 @@
-require 'rodakase/container'
+require 'dry/web/container'
 
 module Simple
-  class Container < Rodakase::Container
+  class Container < Dry::Web::Container
     setting :auto_register, 'lib'
 
     configure do
