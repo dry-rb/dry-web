@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'rodakase/cli'
-require_relative '../core/boot'
-
-Rodakase::Cli.start
