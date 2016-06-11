@@ -1,4 +1,0 @@
-development:
-  DATABASE_URL: 'postgres://localhost/rodakase'
-test:
-  DATABASE_URL: 'postgres://localhost/rodakase'
