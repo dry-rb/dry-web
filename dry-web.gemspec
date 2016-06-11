@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Dry::Web::VERSION
   spec.authors       = ["Piotr Solnica"]
   spec.email         = ["piotr.solnica@gmail.com"]
-  spec.summary       = "Lightweight web application stack on top of Roda"
+  spec.summary       = "Lightweight web application stack on top of dry-component"
   spec.description   = spec.summary
-  spec.homepage      = "https://github.com/solnic/rodakase"
+  spec.homepage      = "https://github.com/dry-rb/dry-web"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,14 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "inflecto", "~> 0"
-  spec.add_runtime_dependency "roda", "~> 2.7"
-  spec.add_runtime_dependency "tilt", "~> 2.0"
   spec.add_runtime_dependency "dry-component", "~> 0"
-  spec.add_runtime_dependency "dry-configurable", "~> 0.1"
-  spec.add_runtime_dependency "dry-equalizer", "~> 0.2"
   spec.add_runtime_dependency "dry-transaction", "~> 0.5"
-  spec.add_runtime_dependency "dry-view", "~> 0.1"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 11.0"
