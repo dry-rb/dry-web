@@ -4,7 +4,7 @@ gemspec
 
 group :test do
   gem 'byebug', platform: :mri
-  gem 'codeclimate-test-reporter', platform: :rbx
+  gem 'codeclimate-test-reporter'
 end
 
 group :tools do
