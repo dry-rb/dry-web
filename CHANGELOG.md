@@ -2,7 +2,8 @@
 
 ### Changed
 
-- Roda support extracted into [dry-web-roda](https://github.com/dry-rb/dry-web-roda) (timriley)
+- Extracted Roda support into [dry-web-roda](https://github.com/dry-rb/dry-web-roda) (timriley)
+- Removed `Dry::Web::Transaction::Composer`, which was offering no value above direct calls to `Dry.Transaction` (timriley)
 - Basic skeleton example removed, since skeletons/app generators will soon be provided elsewhere (timriley)
 
 # v0.1.0 / 2016-04-21
