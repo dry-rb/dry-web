@@ -9,12 +9,12 @@ begin
   require 'byebug'
 rescue LoadError; end
 
-ENV['RACK_ENV'] = 'test'
-
 SPEC_ROOT = Pathname(__FILE__).dirname
 
 Dir[SPEC_ROOT.join('support/*.rb').to_s].each { |f| require f }
 Dir[SPEC_ROOT.join('shared/*.rb').to_s].each { |f| require f }
+
+require "dry-web"
 
 module Test; end
 
