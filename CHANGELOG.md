@@ -1,3 +1,10 @@
+# v0.2.0 / 2016-06-12
+
+### Changed
+
+- Roda support extracted into [dry-web-roda](https://github.com/dry-rb/dry-web-roda) (timriley)
+- Basic skeleton example removed, since skeletons/app generators will soon be provided elsewhere (timriley)
+
 # v0.1.0 / 2016-04-21
 
 ### Changed
