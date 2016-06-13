@@ -1,4 +1,5 @@
 require 'dry/component/container'
+require "dry/web/config"
 
 module Dry
   module Web
