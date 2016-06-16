@@ -3,7 +3,7 @@ require "yaml"
 module Dry
   module Web
     class Settings
-      TypeError = Class.new(StandardError)
+      SettingValueError = Class.new(StandardError)
 
       def self.schema
         @schema ||= {}
@@ -41,7 +41,7 @@ module Dry
             begin
               value = type[value] if type
             rescue => e
-              raise TypeError, "error typecasting +#{key}+: #{e}"
+              raise SettingValueError, "error typecasting +#{key}+: #{e}"
             end
 
             setting key, value
