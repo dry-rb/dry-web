@@ -1,3 +1,5 @@
+ENV["RACK_ENV"] = "test"
+
 if RUBY_ENGINE == "ruby"
   require "codeclimate-test-reporter"
   CodeClimate::TestReporter.start
