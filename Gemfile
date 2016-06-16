@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem "dry-component"
+gem "dry-component", github: "dry-rb/dry-component", branch: "master"
 
 group :test do
   gem 'byebug', platform: :mri
