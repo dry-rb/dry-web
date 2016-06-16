@@ -5,17 +5,11 @@ module Dry
     class Settings
       TypeError = Class.new(StandardError)
 
-      AnyType = Class.new do
-        def self.[](value)
-          value
-        end
-      end
-
       def self.schema
         @schema ||= {}
       end
 
-      def self.setting(name, type = AnyType)
+      def self.setting(name, type = nil)
         settings(name => type)
       end
 
@@ -45,7 +39,7 @@ module Dry
             value = ENV.fetch(key.to_s.upcase) { yaml_data[key.to_s.downcase] }
 
             begin
-              value = type[value]
+              value = type[value] if type
             rescue => e
               raise TypeError, "error typecasting +#{key}+: #{e}"
             end
