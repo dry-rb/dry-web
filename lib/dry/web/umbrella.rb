@@ -11,12 +11,23 @@ module Dry
           yield(config) if block
 
           if config.settings_loader && config.settings.kind_of?(EmptySettings)
-            config.settings = config.settings_loader.load(root, env)
+            config.settings = load_settings(config.settings_loader, root, env)
           end
         end
 
         self
       end
+
+      def self.load_settings(loader, root, env)
+        begin
+          loader.load(root, env)
+        rescue => e
+          puts "Could not load your settings: #{e}"
+          puts
+          raise e
+        end
+      end
+      private_class_method :load_settings
     end
   end
 end
