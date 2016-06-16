@@ -1,3 +1,5 @@
+require "yaml"
+
 module Dry
   module Web
     class Settings
