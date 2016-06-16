@@ -3,6 +3,8 @@ require "yaml"
 module Dry
   module Web
     class Settings
+      TypeError = Class.new(StandardError)
+
       AnyType = Class.new do
         def self.[](value)
           value
@@ -41,7 +43,12 @@ module Dry
 
           schema.each do |key, type|
             value = ENV.fetch(key.to_s.upcase) { yaml_data[key.to_s.downcase] }
-            value = type[value]
+
+            begin
+              value = type[value]
+            rescue => e
+              raise TypeError, "error typecasting +#{key}+: #{e}"
+            end
 
             setting key, value
           end
