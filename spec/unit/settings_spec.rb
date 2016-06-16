@@ -71,7 +71,7 @@ RSpec.describe Dry::Web::Settings do
         }
 
         it "raises helpful exceptions if input data does not match constraints" do
-          expect { settings }.to raise_error(Dry::Web::Settings::TypeError)
+          expect { settings }.to raise_error(Dry::Web::Settings::SettingValueError)
           expect { settings }.to raise_error(/error typecasting \+api_key\+/)
         end
       end
