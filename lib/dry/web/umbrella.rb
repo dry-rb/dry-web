@@ -1,16 +1,14 @@
 module Dry
   module Web
     class Umbrella < Dry::Web::Container
-      EmptySettings = Class.new
-
       setting :settings_loader
-      setting :settings, EmptySettings.new
+      setting :settings
 
       def self.configure(env = config.env, &block)
         super() do |config|
           yield(config) if block
 
-          if config.settings_loader && config.settings.kind_of?(EmptySettings)
+          if config.settings_loader && config.settings.nil?
             config.settings = load_settings(config.settings_loader, root, env)
           end
         end
