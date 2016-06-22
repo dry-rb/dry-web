@@ -1,3 +1,5 @@
+require "dry/web/container"
+
 module Dry
   module Web
     class Umbrella < Dry::Web::Container
