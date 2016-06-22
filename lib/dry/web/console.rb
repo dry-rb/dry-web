@@ -1,6 +1,6 @@
 module Dry
   module Web
-    class Cli
+    class Console
       REPL = begin
                require 'pry'
                Pry
