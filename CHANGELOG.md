@@ -1,3 +1,9 @@
+# v0.3.1 / 2016-06-22
+
+### Changed
+
+- Added a necessary version spec for the dry-component dependency (timriley)
+
 # v0.3.0 / 2016-06-22
 
 ### Added
