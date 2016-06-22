@@ -1,3 +1,15 @@
+# v0.3.0 / 2016-06-22
+
+### Added
+
+- Added an `Umbrella` subclass of `Dry::Web::Container`, intended to be a single, top-level wrapper around multiple sub-apps in a dry-web project (timriley)
+- Added `Dry::Web::Settings`, designed to work as an app's single, top-level settings object (timriley)
+- Added `env` config to `Dry::Web::Container`, moved across from dry-component (timriley)
+
+### Changed
+
+- Renamed `Dry::Web::Cli` to `Dry::Web::Console`, to make room for a real CLI in the future, starting with dry-web-roda (timriley)
+
 # v0.2.0 / 2016-06-12
 
 ### Changed
