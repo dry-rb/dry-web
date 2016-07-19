@@ -2,3 +2,4 @@ test:
   api_key: "yaml123"
   precompile_assets: "1"
   undeclared: "not declared in settings"
+  text_with_erb: "Some text with <%= ENV['ERB_TEXT'] %> inserted"

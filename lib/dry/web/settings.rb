@@ -1,4 +1,5 @@
 require "yaml"
+require "erb"
 
 module Dry
   module Web
@@ -29,7 +30,7 @@ module Dry
 
       def self.load(root, env)
         yaml_path = root.join("config/settings.yml")
-        yaml_data = File.exist?(yaml_path) ? YAML.load_file(yaml_path)[env.to_s] : {}
+        yaml_data = File.exist?(yaml_path) ? YAML.load(ERB.new(File.read(yaml_path)).result)[env.to_s] : {}
         schema = self.schema
 
         Class.new do
