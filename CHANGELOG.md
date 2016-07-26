@@ -1,3 +1,9 @@
+# 0.4.1 - 2016-07-26
+
+### Changed
+
+- Set a higher minimum Ruby version (>= 2.1.0) to match dry-auto_inject (timriley)
+
 # 0.4.0 - 2016-07-26
 
 ### Changed
