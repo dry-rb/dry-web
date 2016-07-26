@@ -1,3 +1,9 @@
+# 0.4.0 - 2016-07-26
+
+### Changed
+
+- Require dry-component 0.4.1 for latest `Dry::Component::Container#injector` features and API (timriley)
+
 # v0.3.1 / 2016-06-22
 
 ### Changed
