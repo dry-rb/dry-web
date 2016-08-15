@@ -1,3 +1,7 @@
+# 0.5.0 - 2016-08-15
+
+Update to work with dry-system
+
 # 0.4.1 - 2016-07-26
 
 ### Changed
