@@ -19,7 +19,7 @@ dry-web is composed from the following libraries:
 
 ## LICENSE
 
-See `LICENSE.txt` file.
+See `LICENSE` file.
 
 ## Development
 
