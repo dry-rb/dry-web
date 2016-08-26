@@ -15,7 +15,7 @@
 
 dry-web is composed from the following libraries:
 
-* [dry-component](https://github.com/dry-rb/dry-component)
+* [dry-system](https://github.com/dry-rb/dry-system)
 
 ## LICENSE
 
