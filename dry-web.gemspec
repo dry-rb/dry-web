@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Dry::Web::VERSION
   spec.authors       = ["Piotr Solnica"]
   spec.email         = ["piotr.solnica@gmail.com"]
-  spec.summary       = "Lightweight web application stack on top of dry-component"
+  spec.summary       = "Lightweight web application stack on top of dry-system"
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/dry-rb/dry-web"
   spec.license       = "MIT"
