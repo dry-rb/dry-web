@@ -9,7 +9,9 @@ RSpec.describe "Dry::Web::Container" do
         Dry::Web::Container.remove_instance_variable(:@_config)
       end
 
-      Dry::Web::Container.instance_variable_get(:@_settings)[key] = nil
+      Dry::Web::Container.instance_variable_get(:@_settings).delete_if do |setting|
+        setting.name == :env
+      end
       load "dry/web/container.rb"
     end
 
