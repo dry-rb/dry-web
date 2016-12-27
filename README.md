@@ -11,11 +11,9 @@
 [![Test Coverage](https://codeclimate.com/github/dry-rb/dry-web/badges/coverage.svg)][codeclimate]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-web.svg?branch=master&style=flat)][inchpages]
 
-## Tools
+## Examples
 
-dry-web is composed from the following libraries:
-
-* [dry-system](https://github.com/dry-rb/dry-system)
+See [icelab/berg](https://github.com/icelab/berg) for a working dry-web app, using [dry-web-roda](https://github.com/dry-rb/dry-web-roda).
 
 ## LICENSE
 
@@ -23,13 +21,8 @@ See `LICENSE` file.
 
 ## Development
 
-First, bundle and run the specs, to ensure everything is setup correctly.
-
-    $ bundle install
-    $ bundle exec rspec
-
-See `CODE_OF_CONDUCT.md` file.
-See [icelab/berg](https://github.com/icelab/berg) which uses [dry-rb/dry-web-roda](https://github.com/dry-rb/dry-web-roda) for a usage example.
+After checking out the repo, run `bundle install` to install dependencies. Then, run
+`bundle exec rake spec` to run the tests.
 
 ## Contributing
 
