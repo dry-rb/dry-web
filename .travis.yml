@@ -13,15 +13,9 @@ rvm:
   - 2.3.0
   - rbx-3
   - jruby-9000
-  - ruby-head
-  - jruby-head
 env:
   global:
     - JRUBY_OPTS='--dev -J-Xmx1024M'
-matrix:
-  allow_failures:
-    - rvm: ruby-head
-    - rvm: jruby-head
 notifications:
   email: false
   webhooks:
