@@ -23,20 +23,13 @@ See `LICENSE` file.
 
 ## Development
 
-To run the specs make sure the dummy app uses proper db configuration `spec/dummy/config/application.yml`.
-Also you need to run the migrations, do following:
+First, bundle and run the specs, to ensure everything is setup correctly.
 
-```
-  $ cd spec/dummy
-  $ bundle install
-  $ rake db:migrate
-```
+    $ bundle install
+    $ bundle exec rspec
 
-After that you can run the specs from dry-web root:
-
-```
-  $ bundle exec rspec
-```
+See `CODE_OF_CONDUCT.md` file.
+See [icelab/berg](https://github.com/icelab/berg) which uses [dry-rb/dry-web-roda](https://github.com/dry-rb/dry-web-roda) for a usage example.
 
 ## Contributing
 
