@@ -1,14 +1,17 @@
 language: ruby
-sudo: false
+dist: trusty
+sudo: required
 cache: bundler
 bundler_args: --without tools
 script:
   - bundle exec rake spec
+after_script:
+  - bundle exec codeclimate-test-reporter
 rvm:
   - 2.1
   - 2.2
   - 2.3.0
-  - rbx-2
+  - rbx-3
   - jruby-9000
   - ruby-head
   - jruby-head
