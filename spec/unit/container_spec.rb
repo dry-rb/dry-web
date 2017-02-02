@@ -1,5 +1,5 @@
 RSpec.describe "Dry::Web::Container" do
-  subject(:container) { Dry::Web::Container }
+  subject(:container) { Class.new(Dry::Web::Container) }
 
   describe "settings" do
     # Do some acrobatics to make the container reload a setting from scratch
@@ -13,6 +13,24 @@ RSpec.describe "Dry::Web::Container" do
         setting.name == key
       end
       load "dry/web/container.rb"
+    end
+
+    describe ".config.logger" do
+      it 'sets up default logger for development env' do
+        container.configure do |config|
+          config.env = :development
+        end
+
+        expect(container[:logger].level).to be(Logger::DEBUG)
+      end
+
+      it 'sets up default logger for non-development env' do
+        container.configure do |config|
+          config.env = :production
+        end
+
+        expect(container[:logger].level).to be(Logger::ERROR)
+      end
     end
 
     describe ".config.env" do
