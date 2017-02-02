@@ -11,7 +11,11 @@ module Dry
 
       class << self
         def configure(&block)
-          super.configure_logger.configure_notifications.configure_rack_monitor
+          super.
+            configure_logger.
+            configure_notifications.
+            configure_rack_monitor.
+            attach_listeners
         end
 
         def configure_logger
@@ -36,6 +40,12 @@ module Dry
         def configure_rack_monitor
           return self if key?(:rack_monitor)
           register(:rack_monitor, Monitor::Rack::Middleware.new(self[:notifications]))
+          self
+        end
+
+        def attach_listeners
+          rack_logger = Monitor::Rack::Logger.new(self[:logger])
+          rack_logger.subscribe(self[:notifications])
           self
         end
       end

@@ -61,6 +61,23 @@ RSpec.describe "Dry::Web::Container" do
       end
     end
 
+    describe '.config.rack_logger' do
+      it 'sets up rack logger by default' do
+        logger = spy(:logger)
+
+        container.configure do |config|
+          config.env = :development
+          config.logger = logger
+        end
+
+        payload = { a_rack: :env_hash }
+
+        container[:notifications].start(:'request.start', env: payload)
+
+        expect(logger).to have_received(:info)
+      end
+    end
+
     describe ".config.env" do
       context "existing RACK_ENV environment variable" do
         before do
