@@ -24,7 +24,7 @@ module Dry
           elsif config.logger
             register(:logger, config.logger)
           else
-            config.logger = Monitor::Logger.new(config.root.join(config.log_dir).join("#{config.env}.log").realpath)
+            config.logger = Monitor::Logger.new(config.root.join(config.log_dir).realpath.join("#{config.env}.log"))
             config.logger.level = config.log_levels.fetch(config.env, Logger::ERROR)
             register(:logger, config.logger)
             self
