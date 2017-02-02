@@ -1,5 +1,5 @@
 require 'dry/system/container'
-require 'dry/monitor/logger'
+require 'dry/monitor'
 
 module Dry
   module Web
@@ -8,10 +8,11 @@ module Dry
       setting :log_dir, 'log'.freeze
       setting :log_levels, development: Logger::DEBUG
       setting :logger
+      setting :notifications
 
       class << self
         def configure(&block)
-          super.configure_logger
+          super.configure_logger.configure_notifications
         end
 
         def configure_logger
@@ -25,6 +26,11 @@ module Dry
             register(:logger, config.logger)
             self
           end
+        end
+
+        def configure_notifications
+          register(:notifications, Monitor::Notifications.new(config.name))
+          self
         end
       end
     end

@@ -41,6 +41,16 @@ RSpec.describe "Dry::Web::Container" do
       end
     end
 
+    describe '.config.notifications' do
+      it 'sets up notifications by default' do
+        container.configure do |config|
+          config.env = :development
+        end
+
+        expect(container[:notifications].id).to be(container.config.name)
+      end
+    end
+
     describe ".config.env" do
       context "existing RACK_ENV environment variable" do
         before do
