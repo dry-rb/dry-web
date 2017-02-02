@@ -31,6 +31,14 @@ RSpec.describe "Dry::Web::Container" do
 
         expect(container[:logger].level).to be(Logger::ERROR)
       end
+
+      it 'allows presetting a loggert' do
+        container.configure do |config|
+          config.logger = 'my logger'
+        end
+
+        expect(container[:logger]).to eql('my logger')
+      end
     end
 
     describe ".config.env" do
