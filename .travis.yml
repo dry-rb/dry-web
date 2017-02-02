@@ -8,11 +8,11 @@ script:
 after_script:
   - bundle exec codeclimate-test-reporter
 rvm:
-  - 2.1
+  - 2.4.0
+  - 2.3
   - 2.2
-  - 2.3.0
   - rbx-3
-  - jruby-9000
+  - jruby-0.1.6.0
 env:
   global:
     - JRUBY_OPTS='--dev -J-Xmx1024M'
