@@ -47,7 +47,7 @@ module Dry
         def attach_listeners
           return unless config.listeners
           rack_logger = Monitor::Rack::Logger.new(self[:logger])
-          rack_logger.subscribe(self[:notifications])
+          rack_logger.attach(self[:rack_monitor])
           self
         end
       end

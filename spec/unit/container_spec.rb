@@ -73,7 +73,7 @@ RSpec.describe "Dry::Web::Container" do
 
         payload = { a_rack: :env_hash }
 
-        container[:notifications].start(:'request.start', env: payload)
+        container[:rack_monitor].instrument(:start, env: payload)
 
         expect(logger).to have_received(:info)
       end
