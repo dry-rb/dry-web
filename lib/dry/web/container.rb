@@ -8,6 +8,7 @@ module Dry
       setting :log_dir, 'log'.freeze
       setting :log_levels, development: Logger::DEBUG
       setting :logger
+      setting :listeners, false
 
       class << self
         def configure(&block)
@@ -44,6 +45,7 @@ module Dry
         end
 
         def attach_listeners
+          return unless config.listeners
           rack_logger = Monitor::Rack::Logger.new(self[:logger])
           rack_logger.subscribe(self[:notifications])
           self

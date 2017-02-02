@@ -68,6 +68,7 @@ RSpec.describe "Dry::Web::Container" do
         container.configure do |config|
           config.env = :development
           config.logger = logger
+          config.listeners = true
         end
 
         payload = { a_rack: :env_hash }
