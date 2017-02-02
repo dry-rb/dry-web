@@ -8,11 +8,10 @@ module Dry
       setting :log_dir, 'log'.freeze
       setting :log_levels, development: Logger::DEBUG
       setting :logger
-      setting :notifications
 
       class << self
         def configure(&block)
-          super.configure_logger.configure_notifications
+          super.configure_logger.configure_notifications.configure_rack_monitor
         end
 
         def configure_logger
@@ -29,7 +28,14 @@ module Dry
         end
 
         def configure_notifications
+          return self if key?(:notifications)
           register(:notifications, Monitor::Notifications.new(config.name))
+          self
+        end
+
+        def configure_rack_monitor
+          return self if key?(:rack_monitor)
+          register(:rack_monitor, Monitor::Rack::Middleware.new(self[:notifications]))
           self
         end
       end
