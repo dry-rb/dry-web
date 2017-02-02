@@ -1,3 +1,9 @@
+# 0.6.0 - 2017-02-02
+
+### Added
+
+* Support for [dry-monitor](https://github.com/dry-rb/dry-monitor) with notifications and rack logging (solnic)
+
 # 0.5.0 - 2016-08-15
 
 Update to work with dry-system
