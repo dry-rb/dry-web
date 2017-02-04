@@ -18,6 +18,7 @@ RSpec.describe Dry::Web::Settings do
         setting :api_key
         setting :precompile_assets
         setting :env_only_setting
+        setting :text_with_erb
       end.load(SPEC_ROOT.join("fixtures/test"), :test)
     }
 
@@ -32,6 +33,11 @@ RSpec.describe Dry::Web::Settings do
 
     it "ignores undeclared settings in the YAML file" do
       expect(settings).not_to respond_to(:undeclared)
+    end
+
+    it "allows ERB the YAML file" do
+      ENV["ERB_TEXT"] = "ERB"
+      expect(settings.text_with_erb).to eq "Some text with ERB inserted"
     end
 
     context "settings with types" do
