@@ -26,12 +26,22 @@ RSpec.describe Dry::Web::Settings do
       expect(settings.env_only_setting).to eq "hello"
     end
 
-    it "loads settings from a YAML file (as lower-cased keys) if unavailable from ENV" do
+    it "loads settings from a env file (as upper-cased keys) if unavailable from ENV" do
       expect(settings.api_key).to eq "yaml123"
     end
 
-    it "ignores undeclared settings in the YAML file" do
+    it "ignores undeclared settings in the env file" do
       expect(settings).not_to respond_to(:undeclared)
+    end
+
+    it "raises an error if no file is found" do
+      expect {
+        Class.new(Dry::Web::Settings) do
+          setting :api_key
+          setting :precompile_assets
+          setting :env_only_setting
+        end.load(SPEC_ROOT.join("fixtures/test"), :development)
+      }.to raise_error(Dry::Web::Settings::MissingEnvFile)
     end
 
     context "settings with types" do

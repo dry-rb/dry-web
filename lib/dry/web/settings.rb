@@ -1,9 +1,8 @@
-require "yaml"
-
 module Dry
   module Web
     class Settings
       SettingValueError = Class.new(StandardError)
+      MissingEnvFile = Class.new(StandardError)
 
       def self.schema
         @schema ||= {}
@@ -27,16 +26,39 @@ module Dry
       end
       private_class_method :check_schema_duplication
 
+      def self.extract_environment_data(root, env)
+        env_file = find_env_file(root, env)
+        raise MissingEnvFile, "Try to load #{env} file, but no file found" unless env_file
+        parse_file(env_file)
+      end
+      private_class_method :extract_environment_data
+
+      def self.find_env_file(root, env)
+        root.each_child.find { |path| path.basename.fnmatch(".env.#{env}") }
+      end
+      private_class_method :find_env_file
+
+      def self.parse_file(file)
+        result = {}
+        File.readlines(file).each do |line|
+          key, value = line.split('=')
+          if key && value
+            result[key] = value.strip.sub(/\A(['"])(.*)\1\z/, '\2')
+          end
+        end
+        result
+      end
+      private_class_method :parse_file
+
       def self.load(root, env)
-        yaml_path = root.join("config/settings.yml")
-        yaml_data = File.exist?(yaml_path) ? YAML.load_file(yaml_path)[env.to_s] : {}
+        env_data = extract_environment_data(root, env)
         schema = self.schema
 
         Class.new do
           extend Dry::Configurable
 
           schema.each do |key, type|
-            value = ENV.fetch(key.to_s.upcase) { yaml_data[key.to_s.downcase] }
+            value = ENV.fetch(key.to_s.upcase) { env_data[key.to_s.upcase] }
 
             begin
               value = type[value] if type
