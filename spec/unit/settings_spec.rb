@@ -34,14 +34,17 @@ RSpec.describe Dry::Web::Settings do
       expect(settings).not_to respond_to(:undeclared)
     end
 
-    it "raises an error if no file is found" do
-      expect {
+    context "without file" do
+      subject(:settings) {
         Class.new(Dry::Web::Settings) do
           setting :api_key
           setting :precompile_assets
-          setting :env_only_setting
         end.load(SPEC_ROOT.join("fixtures/test"), :development)
-      }.to raise_error(Dry::Web::Settings::MissingEnvFile)
+      }
+
+      it "will retrun an config hash " do
+        expect(settings.to_h).to eq ({api_key: nil, precompile_assets: nil})
+      end
     end
 
     context "settings with types" do

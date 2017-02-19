@@ -2,7 +2,6 @@ module Dry
   module Web
     class Settings
       SettingValueError = Class.new(StandardError)
-      MissingEnvFile = Class.new(StandardError)
 
       def self.schema
         @schema ||= {}
@@ -28,7 +27,7 @@ module Dry
 
       def self.extract_environment_data(root, env)
         env_file = find_env_file(root, env)
-        raise MissingEnvFile, "Try to load #{env} file, but no file found" unless env_file
+        return {} unless env_file
         parse_file(env_file)
       end
       private_class_method :extract_environment_data
