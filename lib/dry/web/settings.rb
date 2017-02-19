@@ -1,3 +1,5 @@
+require "dry/web/parser"
+
 module Dry
   module Web
     class Settings
@@ -38,14 +40,7 @@ module Dry
       private_class_method :find_env_file
 
       def self.parse_file(file)
-        result = {}
-        File.readlines(file).each do |line|
-          key, value = line.split('=')
-          if key && value
-            result[key] = value.strip.sub(/\A(['"])(.*)\1\z/, '\2')
-          end
-        end
-        result
+        Parser.call(file)
       end
       private_class_method :parse_file
 
