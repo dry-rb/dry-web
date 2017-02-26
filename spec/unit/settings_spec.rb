@@ -47,6 +47,18 @@ RSpec.describe Dry::Web::Settings do
       end
     end
 
+    context "specific env file will merge on top of `.env`" do
+      subject(:settings) {
+        Class.new(Dry::Web::Settings) do
+          setting :in_both_environment
+        end.load(SPEC_ROOT.join("fixtures/multiple_env_files"), :test)
+      }
+
+      it "will retrun the value set from the test env " do
+        expect(settings.in_both_environment).to eq ".env.test"
+      end
+    end
+
     context "settings with types" do
       before do
         Test::CoercingBool = Class.new do

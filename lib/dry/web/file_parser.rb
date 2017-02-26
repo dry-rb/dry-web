@@ -1,6 +1,6 @@
 module Dry
   module Web
-    class Parser
+    class FileParser
       # Regex extracted from dotenv gem
       # https://github.com/bkeepers/dotenv/blob/master/lib/dotenv/parser.rb#L14
       LINE = %r(
@@ -21,29 +21,22 @@ module Dry
         \z
       )x
 
-      def self.call(file)
-        new(file).parse
-      end
-
-      def initialize(file)
-        @file = file
-        @hash = {}
-      end
-
-      def parse
-        File.readlines(@file).each do |line|
-          parse_line(line)
+      def call(file)
+        File.readlines(file).each_with_object({}) do |line, hash|
+          parse_line(line, hash)
         end
-        @hash
+      rescue Errno::ENOENT
+        {}
       end
 
       private
 
-      def parse_line(line)
+      def parse_line(line, hash)
         if (match = line.match(LINE))
           key, value = match.captures
-          @hash[key] = parse_value(value || "")
+          hash[key] = parse_value(value || "")
         end
+        hash
       end
 
       def parse_value(value)

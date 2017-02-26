@@ -1,4 +1,4 @@
-require "dry/web/parser"
+require "dry/web/environment_data"
 
 module Dry
   module Web
@@ -28,21 +28,9 @@ module Dry
       private_class_method :check_schema_duplication
 
       def self.extract_environment_data(root, env)
-        env_file = find_env_file(root, env)
-        return {} unless env_file
-        parse_file(env_file)
+        EnvironmentData.new.(root, env)
       end
       private_class_method :extract_environment_data
-
-      def self.find_env_file(root, env)
-        root.each_child.find { |path| path.basename.fnmatch(".env.#{env}") }
-      end
-      private_class_method :find_env_file
-
-      def self.parse_file(file)
-        Parser.call(file)
-      end
-      private_class_method :parse_file
 
       def self.load(root, env)
         env_data = extract_environment_data(root, env)
