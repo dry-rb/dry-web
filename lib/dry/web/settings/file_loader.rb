@@ -5,8 +5,8 @@ module Dry
     class Settings
       class FileLoader
         def call(root, env)
-          files(root, env).each_with_object({}) do |file, hash|
-            hash.merge!(parser.(file))
+          files(root, env).reduce({}) do |hash, file|
+            hash.merge(parser.(file))
           end
         end
 
