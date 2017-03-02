@@ -1,4 +1,4 @@
-require "dry/web/environment_data"
+require "dry/web/settings/file_loader"
 
 module Dry
   module Web
@@ -27,13 +27,13 @@ module Dry
       end
       private_class_method :check_schema_duplication
 
-      def self.extract_environment_data(root, env)
-        EnvironmentData.new.(root, env)
+      def self.load_files(root, env)
+        FileLoader.new.(root, env)
       end
-      private_class_method :extract_environment_data
+      private_class_method :load_files
 
       def self.load(root, env)
-        env_data = extract_environment_data(root, env)
+        env_data = load_files(root, env)
         schema = self.schema
 
         Class.new do

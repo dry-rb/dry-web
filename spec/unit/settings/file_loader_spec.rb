@@ -1,7 +1,7 @@
-require "dry/web/environment_data"
+require "dry/web/settings/file_loader"
 
-RSpec.describe Dry::Web::EnvironmentData do
-  let(:klass) { Dry::Web::EnvironmentData }
+RSpec.describe Dry::Web::Settings::FileLoader do
+  let(:klass) { Dry::Web::Settings::FileLoader }
   let(:root) { SPEC_ROOT.join("fixtures/multiple_env_files") }
   let(:env) { :test }
   subject(:data) { klass.new.(root, env)  }

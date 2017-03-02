@@ -1,7 +1,7 @@
-require "dry/web/file_parser"
+require "dry/web/settings/file_parser"
 
-RSpec.describe Dry::Web::FileParser do
-  let(:klass) { Dry::Web::FileParser }
+RSpec.describe Dry::Web::Settings::FileParser do
+  let(:klass) { Dry::Web::Settings::FileParser }
   let(:parser) { klass.new  }
 
   describe "#call" do
