@@ -1,4 +1,4 @@
-require "yaml"
+require "dry/web/settings/file_loader"
 
 module Dry
   module Web
@@ -27,16 +27,20 @@ module Dry
       end
       private_class_method :check_schema_duplication
 
+      def self.load_files(root, env)
+        FileLoader.new.(root, env)
+      end
+      private_class_method :load_files
+
       def self.load(root, env)
-        yaml_path = root.join("config/settings.yml")
-        yaml_data = File.exist?(yaml_path) ? YAML.load_file(yaml_path)[env.to_s] : {}
+        env_data = load_files(root, env)
         schema = self.schema
 
         Class.new do
           extend Dry::Configurable
 
           schema.each do |key, type|
-            value = ENV.fetch(key.to_s.upcase) { yaml_data[key.to_s.downcase] }
+            value = ENV.fetch(key.to_s.upcase) { env_data[key.to_s.upcase] }
 
             begin
               value = type[value] if type

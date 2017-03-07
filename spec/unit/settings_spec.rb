@@ -26,12 +26,37 @@ RSpec.describe Dry::Web::Settings do
       expect(settings.env_only_setting).to eq "hello"
     end
 
-    it "loads settings from a YAML file (as lower-cased keys) if unavailable from ENV" do
+    it "loads settings from a env file (as upper-cased keys) if unavailable from ENV" do
       expect(settings.api_key).to eq "yaml123"
     end
 
-    it "ignores undeclared settings in the YAML file" do
+    it "ignores undeclared settings in the env file" do
       expect(settings).not_to respond_to(:undeclared)
+    end
+
+    context "without file" do
+      subject(:settings) {
+        Class.new(Dry::Web::Settings) do
+          setting :api_key
+          setting :precompile_assets
+        end.load(SPEC_ROOT.join("fixtures/test"), :development)
+      }
+
+      it "will retrun an config hash " do
+        expect(settings.to_h).to eq ({api_key: nil, precompile_assets: nil})
+      end
+    end
+
+    context "specific env file will merge on top of `.env`" do
+      subject(:settings) {
+        Class.new(Dry::Web::Settings) do
+          setting :in_both_environment
+        end.load(SPEC_ROOT.join("fixtures/multiple_env_files"), :test)
+      }
+
+      it "will retrun the value set from the test env " do
+        expect(settings.in_both_environment).to eq ".env.test"
+      end
     end
 
     context "settings with types" do
