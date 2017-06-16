@@ -1,3 +1,10 @@
+# 0.7.0 - 2017-06-16
+
+### Changed
+
+- [BREAKING] `Dry::Web::Settings` now loads settings from local `.env` and `.env.<environment>` files (GustavoCaso)
+- [BREAKING] Removed `Dry::Web::Umbrella` with special handling of settings. Settings should for now be provided as a bootable component within your applications (dry-web-roda will be updated to generate such) (timriley)
+
 # 0.6.0 - 2017-02-02
 
 ### Added
