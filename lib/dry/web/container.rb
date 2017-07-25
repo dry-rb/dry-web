@@ -6,7 +6,7 @@ module Dry
     class Container < Dry::System::Container
       setting :env, ENV.fetch('RACK_ENV', 'development').to_sym
       setting :log_dir, 'log'.freeze
-      setting :log_levels, development: Logger::DEBUG
+      setting :log_levels, development: Logger::DEBUG, test: Logger::DEBUG
       setting :logger
       setting :listeners, false
 
