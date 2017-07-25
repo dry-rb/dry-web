@@ -1,3 +1,9 @@
+# 0.7.1 - 2017-07-25
+
+### Changed
+
+- Default log level for `:test` env is set to `Logger::DEBUG` (solnic)
+
 # 0.7.0 - 2017-06-16
 
 ### Changed
