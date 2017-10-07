@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "dry/web/cli"
+require "dry/web/cli/commands"
+
+cli = Dry::Web::CLI.new(Dry::Web::CLI::Commands)
+cli.call
