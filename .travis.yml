@@ -1,21 +1,17 @@
 language: ruby
-dist: trusty
-sudo: required
 cache: bundler
-bundler_args: --without tools
+bundler_args: --without benchmarks tools
 script:
   - bundle exec rake spec
 after_script:
   - bundle exec codeclimate-test-reporter
 rvm:
-  - 2.4.0
+  - 2.4.2
   - 2.3
-  - 2.2
-  - rbx-3
-  - jruby-9.1.6.0
+  - jruby
 env:
   global:
-    - JRUBY_OPTS='--dev -J-Xmx1024M'
+    - COVERAGE='true'
 notifications:
   email: false
   webhooks:
