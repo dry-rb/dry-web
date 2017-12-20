@@ -6,26 +6,20 @@ module Dry
     class Container < Dry::System::Container
       use :env, inferrer: -> { ENV.fetch('RACK_ENV', 'development').to_sym }
       use :logging
+      use :notifications
 
       setting :logger_class, Monitor::Logger
       setting :listeners, false
 
       def self.inherited(klass)
         klass.after(:configure) do
-          register_notifications.
-            register_rack_monitor.
-            attach_listeners
+          register_rack_monitor
+          attach_listeners
         end
         super
       end
 
       class << self
-        def register_notifications
-          return self if key?(:notifications)
-          register(:notifications, Monitor::Notifications.new(config.name))
-          self
-        end
-
         def register_rack_monitor
           return self if key?(:rack_monitor)
           register(:rack_monitor, Monitor::Rack::Middleware.new(self[:notifications]))
