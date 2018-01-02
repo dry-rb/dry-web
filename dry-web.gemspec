@@ -20,8 +20,8 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.1.0'
 
-  spec.add_runtime_dependency "dry-system", "~> 0.5"
-  spec.add_runtime_dependency "dry-monitor"
+  spec.add_runtime_dependency "dry-system", "~> 0.9"
+  spec.add_runtime_dependency "dry-monitor", "~> 0.1"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 11.0"
