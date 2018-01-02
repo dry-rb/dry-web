@@ -1,3 +1,11 @@
+# 0.8.0 - 2018-01-02
+
+### Changed
+
+* Updated to `dry-system ~> 0.8` (solnic)
+
+[Compare v0.7.1...v0.8.0](https://github.com/dry-rb/dry-web/compare/v0.7.1...v0.8.0)
+
 # 0.7.1 - 2017-07-25
 
 ### Changed
