@@ -2,7 +2,7 @@
 
 ### Changed
 
-* Updated to `dry-system ~> 0.8` (solnic)
+* Updated to `dry-system ~> 0.9` (solnic)
 
 [Compare v0.7.1...v0.8.0](https://github.com/dry-rb/dry-web/compare/v0.7.1...v0.8.0)
 
