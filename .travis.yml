@@ -6,9 +6,10 @@ script:
 after_script:
   - bundle exec codeclimate-test-reporter
 rvm:
-  - 2.4.2
-  - 2.3
-  - jruby
+  - 2.5.0
+  - 2.4.3
+  - 2.3.6
+  - jruby-9.1.9.0
 env:
   global:
     - COVERAGE='true'
