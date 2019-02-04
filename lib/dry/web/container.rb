@@ -1,6 +1,8 @@
 require 'dry/system/container'
 require 'dry/monitor'
 
+Dry::Monitor.load_extensions(:rack)
+
 module Dry
   module Web
     class Container < Dry::System::Container
