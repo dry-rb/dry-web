@@ -1,3 +1,8 @@
+require 'rack'
+require 'dry/monitor'
+require 'dry/monitor/rack/middleware'
+require 'dry/monitor/rack/logger'
+
 RSpec.describe "Dry::Web::Container" do
   subject(:container) { Class.new(Dry::Web::Container) }
 
