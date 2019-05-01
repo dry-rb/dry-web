@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gemspec
 
-gem 'dry-system', git: 'https://github.com/dry-rb/dry-system.git', branch: 'master'
+# gem 'dry-system', git: 'https://github.com/dry-rb/dry-system.git', branch: 'master'
 gem 'dry-monitor', git: 'https://github.com/dry-rb/dry-monitor.git', branch: 'master'
 gem 'dry-events', git: 'https://github.com/dry-rb/dry-events.git', branch: 'master'
 
