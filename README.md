@@ -1,29 +1,29 @@
-[gem]: https://rubygems.org/gems/dry-web
-[travis]: https://travis-ci.org/dry-rb/dry-web
-[codeclimate]: https://codeclimate.com/github/dry-rb/dry-web
-[inchpages]: http://inch-ci.org/github/dry-rb/dry-web/
+[gem]: https://rubygems.org/gems/dry-system
+[actions]: https://github.com/dry-rb/dry-system/actions
+[codacy]: https://www.codacy.com/gh/dry-rb/dry-system
+[chat]: https://dry-rb.zulipchat.com
+[inchpages]: http://inch-ci.org/github/dry-rb/dry-system
 
-# dry-web [![Join the chat at https://gitter.im/dry-rb/chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/dry-rb/chat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# dry-system [![Join the chat at https://dry-rb.zulipchat.com](https://img.shields.io/badge/dry--rb-join%20chat-%23346b7a.svg)][chat]
 
-[![Gem Version](https://badge.fury.io/rb/dry-web.svg)][gem]
-[![Build Status](https://travis-ci.org/dry-rb/dry-web.svg?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/dry-rb/dry-web/badges/gpa.svg)][codeclimate]
-[![Test Coverage](https://codeclimate.com/github/dry-rb/dry-web/badges/coverage.svg)][codeclimate]
-[![Inline docs](http://inch-ci.org/github/dry-rb/dry-web.svg?branch=master&style=flat)][inchpages]
+[![Gem Version](https://badge.fury.io/rb/dry-system.svg)][gem]
+[![CI Status](https://github.com/dry-rb/dry-system/workflows/ci/badge.svg)][actions]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/be704195dea94c9185259c7a89fdecba)][codacy]
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/be704195dea94c9185259c7a89fdecba)][codacy]
+[![Inline docs](http://inch-ci.org/github/dry-rb/dry-system.svg?branch=master)][inchpages]
 
-## Examples
+## Links
 
-See [icelab/berg](https://github.com/icelab/berg) for a working dry-web app, using [dry-web-roda](https://github.com/dry-rb/dry-web-roda).
+* [User documentation](http://dry-rb.org/gems/dry-system)
+* [API documentation](http://rubydoc.info/gems/dry-system)
 
-## LICENSE
+## Supported Ruby versions
+
+This library officially supports the following Ruby versions:
+
+* MRI >= `2.4`
+* jruby >= `9.2`
+
+## License
 
 See `LICENSE` file.
-
-## Development
-
-After checking out the repo, run `bundle install` to install dependencies. Then, run
-`bundle exec rake spec` to run the tests.
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/dry-rb/dry-web.
