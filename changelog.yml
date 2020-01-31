@@ -1,0 +1,69 @@
+---
+- version: 0.8.0
+  date: '2018-01-02'
+  changed:
+  - Updated to `dry-system ~> 0.9` (solnic)
+- version: 0.7.1
+  date: '2017-07-25'
+  changed:
+  - Default log level for `:test` env is set to `Logger::DEBUG` (solnic)
+- version: 0.7.0
+  date: '2017-06-16'
+  changed:
+  - "[BREAKING] `Dry::Web::Settings` now loads settings from local `.env` and `.env.<environment>`
+    files (GustavoCaso)"
+  - "[BREAKING] Removed `Dry::Web::Umbrella` with special handling of settings. Settings
+    should for now be provided as a bootable component within your applications (dry-web-roda
+    will be updated to generate such) (timriley)"
+- version: 0.6.0
+  date: '2017-02-02'
+  added:
+  - Support for [dry-monitor](https://github.com/dry-rb/dry-monitor) with notifications
+    and rack logging (solnic)
+- version: 0.5.0
+  date: '2016-08-15'
+  summary: Update to work with dry-system
+- version: 0.4.1
+  date: '2016-07-26'
+  changed:
+  - Set a higher minimum Ruby version (>= 2.1.0) to match dry-auto_inject (timriley)
+- version: 0.4.0
+  date: '2016-07-26'
+  changed:
+  - Require dry-component 0.4.1 for latest `Dry::Component::Container#injector` features
+    and API (timriley)
+- version: 0.3.1
+  date: '2016-06-22'
+  changed:
+  - Added a necessary version spec for the dry-component dependency (timriley)
+- version: 0.3.0
+  date: '2016-06-22'
+  added:
+  - Added an `Umbrella` subclass of `Dry::Web::Container`, intended to be a single,
+    top-level wrapper around multiple sub-apps in a dry-web project (timriley)
+  - Added `Dry::Web::Settings`, designed to work as an app's single, top-level settings
+    object (timriley)
+  - Added `env` config to `Dry::Web::Container`, moved across from dry-component (timriley)
+  changed:
+  - Renamed `Dry::Web::Cli` to `Dry::Web::Console`, to make room for a real CLI in
+    the future, starting with dry-web-roda (timriley)
+- version: 0.2.0
+  date: '2016-06-12'
+  changed:
+  - Extracted Roda support into [dry-web-roda](https://github.com/dry-rb/dry-web-roda)
+    (timriley)
+  - Removed `Dry::Web::Transaction::Composer`, which was offering no value above direct
+    calls to `Dry.Transaction` (timriley)
+  - Basic skeleton example removed, since skeletons/app generators will soon be provided
+    elsewhere (timriley)
+- version: 0.1.0
+  date: '2016-04-21'
+  changed:
+  - "– Renamed from rodakase to dry-web"
+  - "– Dependency management features were extracted into [dry-component](https://github.com/dry-rb/dry-component)"
+  - "– `Rodakase::View` was extracted into the [dry-view](https://github.com/dry-rb/dry-view)
+    gem"
+- version: 0.0.1
+  date: '2015-11-13'
+  summary: 'Awesome, first release on Friday 13th. Let''s be optimistic. This release
+    ships with:'

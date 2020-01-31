@@ -1,0 +1,13 @@
+name: dry-system
+codacy_id: be704195dea94c9185259c7a89fdecba
+gemspec:
+  authors: ["Piotr Solnica"]
+  email: ["piotr.solnica@gmail.com"]
+  summary: "Lightweight web application stack on top of dry-system"
+  development_dependencies:
+    - bundler
+    - rake
+    - rspec
+  runtime_dependencies:
+    - ["dry-system", "~> 0.15"]
+    - ["dry-monitor", "~> 0.3"]

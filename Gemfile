@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gemspec
 
+eval_gemfile 'Gemfile.devtools'
+
 group :test do
-  gem 'byebug', platform: :mri
-  gem 'codeclimate-test-reporter'
   gem 'rack'
 end
 

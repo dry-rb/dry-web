@@ -1,11 +1,6 @@
-ENV["RACK_ENV"] = "test"
+require_relative 'support/coverage'
 
-if RUBY_ENGINE == "ruby"
-  require "simplecov"
-  SimpleCov.start do
-    add_filter "/spec/"
-  end
-end
+ENV['RACK_ENV'] = 'test'
 
 begin
   require 'byebug'
