@@ -22,12 +22,14 @@ module Dry
       class << self
         def register_rack_monitor
           return self if key?(:rack_monitor)
+
           register(:rack_monitor, Monitor::Rack::Middleware.new(self[:notifications]))
           self
         end
 
         def attach_listeners
           return unless config.listeners
+
           rack_logger = Monitor::Rack::Logger.new(self[:logger])
           rack_logger.attach(self[:rack_monitor])
           self
