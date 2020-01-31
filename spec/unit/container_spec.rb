@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rack'
 require 'dry/monitor'
 require 'dry/monitor/rack/middleware'
