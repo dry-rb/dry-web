@@ -1,3 +1,5 @@
+## Deprecated in favor of Hanami 2.0
+
 [gem]: https://rubygems.org/gems/dry-web
 [actions]: https://github.com/dry-rb/dry-web/actions
 [codacy]: https://www.codacy.com/gh/dry-rb/dry-web
