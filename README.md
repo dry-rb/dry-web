@@ -1,5 +1,3 @@
-# ⚠ Deprecated in favor of Hanami 2.0
-
 [gem]: https://rubygems.org/gems/dry-web
 [actions]: https://github.com/dry-rb/dry-web/actions
 [codacy]: https://www.codacy.com/gh/dry-rb/dry-web
@@ -13,6 +11,11 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/be704195dea94c9185259c7a89fdecba)][codacy]
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/be704195dea94c9185259c7a89fdecba)][codacy]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-web.svg?branch=master)][inchpages]
+
+## Links
+
+* [User documentation](http://dry-rb.org/gems/dry-web)
+* [API documentation](http://rubydoc.info/gems/dry-web)
 
 ## Supported Ruby versions
 
