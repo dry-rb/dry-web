@@ -12,6 +12,11 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Coverage/be704195dea94c9185259c7a89fdecba)][codacy]
 [![Inline docs](http://inch-ci.org/github/dry-rb/dry-web.svg?branch=master)][inchpages]
 
+## Links
+
+* [User documentation](http://dry-rb.org/gems/dry-web)
+* [API documentation](http://rubydoc.info/gems/dry-web)
+
 ## Supported Ruby versions
 
 This library officially supports the following Ruby versions:
